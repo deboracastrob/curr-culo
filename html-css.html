@@ -4,178 +4,191 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio HTML5 & CSS3 | Débora Brito</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background-color: #f2f6fc;
-      margin: 0;
-      padding: 20px;
+      margin: 20px;
+      background: #f9f9f9;
       color: #333;
-      line-height: 1.6;
     }
-
-    header {
+    h1 {
       text-align: center;
-      margin-bottom: 30px;
-    }
-
-    header h1 {
       color: #2b7de9;
-      margin-bottom: 5px;
     }
-
-    nav {
-      margin-top: 10px;
-    }
-
-    nav a.btn {
-      background-color: #2b7de9;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      transition: background-color 0.3s ease;
-    }
-
-    nav a.btn:hover,
-    nav a.btn:focus {
-      background-color: #1a5ec1;
-      outline: none;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      color: #2b7de9;
-      border-bottom: 3px solid #2b7de9;
-      padding-bottom: 6px;
-      margin-bottom: 15px;
-    }
-
-    p.intro {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-    }
-
-    article.project {
+    section.project {
       background: white;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       margin-bottom: 25px;
-      transition: box-shadow 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
     }
-
-    article.project:hover {
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    section.project h2 {
+      color: #2b7de9;
     }
-
-    article.project h3 {
-      margin-top: 0;
-      color: #1b4da6;
+    /* Projeto 1 - Portfolio pessoal */
+    .portfolio {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
     }
-
-    article.project p {
-      margin-bottom: 10px;
+    .portfolio .card {
+      background: #e8f0fe;
+      border-radius: 8px;
+      padding: 15px;
+      width: 280px;
+      box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+      transition: transform 0.3s ease;
     }
-
-    article.project a.btn {
-      background-color: #2b7de9;
-      padding: 8px 16px;
-      font-weight: normal;
+    .portfolio .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.15);
+    }
+    /* Projeto 2 - Galeria */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      gap: 15px;
+    }
+    .gallery figure {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .gallery img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+    .gallery figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px;
       font-size: 0.9rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery figure:hover figcaption {
+      opacity: 1;
+    }
+    /* Projeto 3 - Formulário */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #e8f0fe;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+    }
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
       border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
     }
-
-    article.project a.btn:hover,
-    article.project a.btn:focus {
-      background-color: #1a5ec1;
+    form input:focus, form textarea:focus {
+      border-color: #2b7de9;
       outline: none;
+      background: #f0f6ff;
     }
-
-    article.project img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-      margin-top: 15px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    form button {
+      background-color: #2b7de9;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
     }
-
-    /* Responsividade */
-    @media (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-
-      nav a.btn {
-        padding: 12px 20px;
-        font-size: 16px;
-      }
-
-      article.project {
-        padding: 15px;
-      }
+    form button:hover {
+      background-color: #1a5ad8;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Portfólio de HTML5 & CSS3</h1>
-    <nav>
-      <a href="index.html" class="btn" title="Voltar ao currículo principal">← Voltar ao currículo</a>
-    </nav>
-  </header>
 
-  <main>
-    <section>
-      <h2>Introdução</h2>
-      <p class="intro">
-        Nesta seção, você encontrará exemplos práticos dos meus projetos utilizando HTML5 semântico e CSS3 moderno, com foco em layouts responsivos, acessibilidade e design visual atraente.
-      </p>
-    </section>
+  <h1>Projetos HTML5 & CSS3</h1>
 
-    <section>
-      <h2>Projetos</h2>
+  <!-- Projeto 1 -->
+  <section class="project" id="portfolio-pessoal">
+    <h2>Portfolio Pessoal Responsivo</h2>
+    <div class="portfolio">
+      <div class="card">
+        <h3>Introdução Semântica</h3>
+        <p>Uso das tags semânticas do HTML5 para estrutura clara e acessível.</p>
+      </div>
+      <div class="card">
+        <h3>Layout Flexbox</h3>
+        <p>Menu e seções alinhados com flexbox e responsividade.</p>
+      </div>
+      <div class="card">
+        <h3>Media Queries</h3>
+        <p>Adaptação para dispositivos móveis com media queries.</p>
+      </div>
+    </div>
+  </section>
 
-      <article class="project">
-        <h3>Landing Page Responsiva</h3>
-        <p>Projeto que utiliza Flexbox e CSS Grid para criar um layout que se adapta perfeitamente a diferentes tamanhos de tela.</p>
-        <a href="https://exemplo.com/projeto1" target="_blank" rel="noopener" class="btn" title="Abrir projeto Landing Page Responsiva">Ver projeto</a>
-        <img src="imagens/projeto1-screenshot.png" alt="Screenshot do projeto Landing Page Responsiva" />
-      </article>
+  <!-- Projeto 2 -->
+  <section class="project" id="galeria-fotos">
+    <h2>Galeria de Fotos com CSS Grid</h2>
+    <div class="gallery">
+      <figure>
+        <img src="https://picsum.photos/id/1015/300/200" alt="Paisagem 1" />
+        <figcaption>Paisagem 1</figcaption>
+      </figure>
+      <figure>
+        <img src="https://picsum.photos/id/1025/300/200" alt="Paisagem 2" />
+        <figcaption>Paisagem 2</figcaption>
+      </figure>
+      <figure>
+        <img src="https://picsum.photos/id/1043/300/200" alt="Paisagem 3" />
+        <figcaption>Paisagem 3</figcaption>
+      </figure>
+      <figure>
+        <img src="https://picsum.photos/id/1069/300/200" alt="Paisagem 4" />
+        <figcaption>Paisagem 4</figcaption>
+      </figure>
+    </div>
+  </section>
 
-      <article class="project">
-        <h3>Formulário de Contato Estilizado</h3>
-        <p>Um formulário acessível e estilizado com CSS3 puro, incluindo efeitos visuais de foco e validação simples.</p>
-        <a href="https://exemplo.com/projeto2" target="_blank" rel="noopener" class="btn" title="Abrir projeto Formulário de Contato">Ver projeto</a>
-        <img src="imagens/projeto2-screenshot.png" alt="Screenshot do projeto Formulário de Contato Estilizado" />
-      </article>
+  <!-- Projeto 3 -->
+  <section class="project" id="formulario-contato">
+    <h2>Formulário de Contato Estilizado</h2>
+    <form action="#" method="post" onsubmit="alert('Formulário enviado!'); return false;">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Seu email" required />
+      
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem" required></textarea>
+      
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
 
-      <article class="project">
-        <h3>Galeria de Imagens com CSS Grid</h3>
-        <p>Galeria responsiva e elegante usando CSS Grid, com efeitos de hover e adaptação para dispositivos móveis.</p>
-        <a href="https://exemplo.com/projeto3" target="_blank" rel="noopener" class="btn" title="Abrir projeto Galeria de Imagens">Ver projeto</a>
-        <img src="imagens/projeto3-screenshot.png" alt="Screenshot do projeto Galeria de Imagens com CSS Grid" />
-      </article>
-    </section>
-  </main>
-
-  <footer>
-    <p style="text-align:center; margin-top: 40px; color:#666;">Débora Brito &copy; 2025</p>
-  </footer>
 </body>
 </html>
