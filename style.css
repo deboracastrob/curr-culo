@@ -28,3 +28,7 @@ footer {
   padding: 15px;
   background-color: #eee;
 }
+
+/* Estilo para o botão de baixar PDF */
+#btnDownload {
+  background-color: #2b7de9;
