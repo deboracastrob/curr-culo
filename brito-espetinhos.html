@@ -59,6 +59,12 @@
       font-size: 0.9rem;
     }
 
+    #qrcode {
+      margin: 15px auto;
+      width: 150px;
+      height: 150px;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 1.5rem;
@@ -69,11 +75,16 @@
       }
     }
   </style>
+
+  <!-- Biblioteca QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
     <h1>Brito Espetinhos</h1>
     <p>Cardápio digital</p>
+    <div id="qrcode"></div>
+    <p style="font-size: 0.9rem; color: white; margin-top: 5px;">Escaneie o QR Code para acessar este cardápio no celular</p>
   </header>
 
   <div class="section">
@@ -116,5 +127,17 @@
   <footer>
     Brito Espetinhos &copy; 2025
   </footer>
+
+  <script>
+    // Gera o QR Code com a URL atual da página
+    const url = window.location.href;
+    new QRCode(document.getElementById("qrcode"), {
+      text: url,
+      width: 150,
+      height: 150,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+    });
+  </script>
 </body>
 </html>
