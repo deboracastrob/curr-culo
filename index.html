@@ -60,61 +60,76 @@
 
       btn.addEventListener('click', () => {
         const doc = new jsPDF();
-
+        const pageHeight = doc.internal.pageSize.height;
         let y = 20;
+        const leftMargin = 10;
+        const maxWidth = 190;
 
+        function addTitle(text) {
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(16);
+          doc.text(text, leftMargin, y);
+          y += 10;
+        }
+
+        function addParagraph(text) {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(12);
+          const lines = doc.splitTextToSize(text, maxWidth);
+          lines.forEach(line => {
+            if (y > pageHeight - 20) {
+              doc.addPage();
+              y = 20;
+            }
+            doc.text(line, leftMargin, y);
+            y += 7;
+          });
+          y += 5;
+        }
+
+        function addBulletList(items) {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(12);
+          items.forEach(item => {
+            if (y > pageHeight - 20) {
+              doc.addPage();
+              y = 20;
+            }
+            doc.text("• " + item, leftMargin + 5, y);
+            y += 7;
+          });
+          y += 5;
+        }
+
+        // Conteúdo do PDF
         doc.setFontSize(22);
-        doc.text("Débora Brito", 10, y);
-        y += 10;
+        doc.setFont("helvetica", "bold");
+        doc.text("Débora Brito", leftMargin, y);
+        y += 12;
         doc.setFontSize(16);
-        doc.text("Desenvolvedora Front-End em transição", 10, y);
+        doc.setFont("helvetica", "normal");
+        doc.text("Desenvolvedora Front-End em transição", leftMargin, y);
         y += 15;
 
-        doc.setFontSize(14);
-        doc.text("Objetivo:", 10, y);
-        y += 8;
-        doc.setFontSize(12);
-        doc.text("Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.", 10, y, {maxWidth: 190});
-        y += 20;
+        addTitle("Objetivo");
+        addParagraph("Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.");
 
-        doc.setFontSize(14);
-        doc.text("Habilidades Técnicas:", 10, y);
-        y += 8;
-        doc.setFontSize(12);
-        const habilidades = [
+        addTitle("Habilidades Técnicas");
+        addBulletList([
           "HTML5, CSS3, JavaScript",
           "Git e GitHub",
           "Noções de React",
           "Lógica com C e Python (CS50)",
           "UI/UX • Figma",
           "Hardware e Redes"
-        ];
-        habilidades.forEach(hab => {
-          doc.text("• " + hab, 15, y);
-          y += 7;
-        });
-        y += 5;
+        ]);
 
-        doc.setFontSize(14);
-        doc.text("Formação:", 10, y);
-        y += 8;
-        doc.setFontSize(12);
-        doc.text("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)", 10, y, {maxWidth: 190});
-        y += 20;
+        addTitle("Formação");
+        addParagraph("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)");
 
-        doc.setFontSize(14);
-        doc.text("Experiência:", 10, y);
-        y += 8;
-        doc.setFontSize(12);
-        const experiencias = [
-          "Estágio em Suporte Técnico - Empresa ABC (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.",
-          "Assistente de TI - Empresa XYZ (2021-2022): Atuação no monitoramento de sistemas, controle de ativos de TI e suporte técnico aos colaboradores, garantindo a continuidade operacional dos serviços de tecnologia."
-        ];
-        experiencias.forEach(exp => {
-          let splitText = doc.splitTextToSize(exp, 190);
-          doc.text(splitText, 10, y);
-          y += splitText.length * 7 + 5;
-        });
+        addTitle("Experiência");
+        addParagraph("Estágio em Suporte Técnico - Empresa ABC (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.");
+        addParagraph("Assistente de TI - Empresa XYZ (2021-2022): Atuação no monitoramento de sistemas, controle de ativos de TI e suporte técnico aos colaboradores, garantindo a continuidade operacional dos serviços de tecnologia.");
 
         doc.save('curriculo.pdf');
       });
