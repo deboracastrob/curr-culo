@@ -2,12 +2,16 @@
   "espetinhos": [
     {"nome": "Espetinho de carne", "preco": "R$ 8,00"},
     {"nome": "Espetinho de frango", "preco": "R$ 6,00"},
-    {"nome": "Espetinho de queijo coalho", "preco": "R$ 10,00"},
-    {"nome": "Espetinho misto", "preco": "R$ 7,00"}
+    {"nome": "Espetinho linguiça", "preco": "R$ 8,00"},
+     {"nome": "Espetinho kafta", "preco": "R$ 9,00"},
+     {"nome": "Espetinho de queijo coalho", "preco": "R$ 10,00"},
+    {"nome": "Espetinho de queijo defumado", "preco": "R$ 10,00"},
   ],
   "marmitas": [
-    {"nome": "2 Espetinhos + Arroz + Tropeiro", "preco": "R$ 20,00"},
-    {"nome": "3 Espetinhos + Arroz + Tropeiro", "preco": "R$ 25,00"}
+    {"nome": "2 Espetinhos Frango + Arroz + Tropeiro", "preco": "R$ 25,00"},
+    {"nome": "2 Espetinhos Carne + Arroz + Tropeiro", "preco": "R$ 30,00"},
+    {"nome": "2 Espetinhos Linguiça + Arroz + Tropeiro", "preco": "R$ 26,00"},
+    {"nome": "2 Espetinhos Kafta + Arroz + Tropeiro", "preco": "R$ 28,00"},
   ],
   "lanches": [
     {"nome": "Lanche de churrasco", "preco": "R$ 15,00"},
