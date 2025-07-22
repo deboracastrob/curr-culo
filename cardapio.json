@@ -1,8 +1,8 @@
 {
   "espetinhos": [
-    {"nome": "Espetinho de carne", "preco": "R$ 6,00"},
-    {"nome": "Espetinho de frango", "preco": "R$ 5,00"},
-    {"nome": "Espetinho de queijo coalho", "preco": "R$ 5,00"},
+    {"nome": "Espetinho de carne", "preco": "R$ 8,00"},
+    {"nome": "Espetinho de frango", "preco": "R$ 6,00"},
+    {"nome": "Espetinho de queijo coalho", "preco": "R$ 10,00"},
     {"nome": "Espetinho misto", "preco": "R$ 7,00"}
   ],
   "marmitas": [
