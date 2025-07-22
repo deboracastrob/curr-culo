@@ -1,0 +1,21 @@
+{
+  "espetinhos": [
+    {"nome": "Espetinho de carne", "preco": "R$ 6,00"},
+    {"nome": "Espetinho de frango", "preco": "R$ 5,00"},
+    {"nome": "Espetinho de queijo coalho", "preco": "R$ 5,00"},
+    {"nome": "Espetinho misto", "preco": "R$ 7,00"}
+  ],
+  "marmitas": [
+    {"nome": "2 Espetinhos + Arroz + Tropeiro", "preco": "R$ 20,00"},
+    {"nome": "3 Espetinhos + Arroz + Tropeiro", "preco": "R$ 25,00"}
+  ],
+  "lanches": [
+    {"nome": "Lanche de churrasco", "preco": "R$ 15,00"},
+    {"nome": "Lanche completo (com queijo)", "preco": "R$ 17,00"}
+  ],
+  "bebidas": [
+    {"nome": "Refrigerante lata", "preco": "R$ 5,00"},
+    {"nome": "Água", "preco": "R$ 3,00"},
+    {"nome": "Suco natural", "preco": "R$ 6,00"}
+  ]
+}
