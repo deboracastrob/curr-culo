@@ -18,8 +18,16 @@
     {"nome": "Lanche completo (com queijo)", "preco": "R$ 17,00"}
   ],
   "bebidas": [
-    {"nome": "Refrigerante lata", "preco": "R$ 5,00"},
+    {"nome": "Cola-cola 350ml", "preco": "R$ 7,00"},
+    {"nome": "Guaraná 269ml", "preco": "R$ 6,00"},
     {"nome": "Água", "preco": "R$ 3,00"},
-    {"nome": "Suco natural", "preco": "R$ 6,00"}
+    {"nome": "Imperio 269ml", "preco": "R$ 5,00"},
+     {"nome": "Skol 269ml", "preco": "R$ 5,00"},
+     {"nome": "Original 269ml", "preco": "R$ 6,50"},
+    {"nome": "Heineken 269ml", "preco": "R$ 7,00"},
+    {"nome": "Copão Gin 760ml", "preco": "R$ 10,00"},
+    {"nome": "Copão Whisky 760ml", "preco": "R$ 10,00"},
+    {"nome": "Copão Vodka 760ml", "preco": "R$ 10,00"},
+    
   ]
 }
