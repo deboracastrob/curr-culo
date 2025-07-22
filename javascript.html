@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfólio JavaScript - Débora Brito</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Portfólio JavaScript</h1>
+    <p>Exemplos práticos usando JavaScript</p>
+  </header>
+
+  <section class="section">
+    <h2>Projeto: Contador simples</h2>
+    <button id="contador">0</button>
+
+    <script>
+      let count = 0;
+      const btn = document.getElementById('contador');
+      btn.addEventListener('click', () => {
+        count++;
+        btn.textContent = count;
+      });
+    </script>
+  </section>
+
+  <section class="section">
+    <h2>Projeto: Validação simples de formulário</h2>
+    <form id="formulario">
+      <input type="email" id="email" placeholder="Digite seu email" required />
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="msg"></p>
+
+    <script>
+      const form = document.getElementById('formulario');
+      const msg = document.getElementById('msg');
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = form.email.value;
+        if(email.includes('@')){
+          msg.textContent = 'Email válido!';
+          msg.style.color = 'green';
+        } else {
+          msg.textContent = 'Email inválido!';
+          msg.style.color = 'red';
+        }
+      });
+    </script>
+  </section>
+
+  <footer>
+    <p><a href="index.html">Voltar ao site principal</a></p>
+  </footer>
+</body>
+</html>
