@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardápio | Brito Espetinhos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fff8f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #b22222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    .category {
+      margin-bottom: 30px;
+    }
+
+    .category h2 {
+      border-bottom: 2px solid #b22222;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      color: #b22222;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed #ccc;
+      padding-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #eee;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .category h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Brito Espetinhos</h1>
+    <p>Cardápio digital</p>
+  </header>
+
+  <div class="section">
+    <div class="category">
+      <h2>Espetinhos</h2>
+      <ul>
+        <li><span>Espetinho de carne</span><span>R$ 6,00</span></li>
+        <li><span>Espetinho de frango</span><span>R$ 5,00</span></li>
+        <li><span>Espetinho de queijo coalho</span><span>R$ 5,00</span></li>
+        <li><span>Espetinho misto</span><span>R$ 7,00</span></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Marmitas</h2>
+      <ul>
+        <li><span>2 Espetinhos + Arroz + Tropeiro</span><span>R$ 20,00</span></li>
+        <li><span>3 Espetinhos + Arroz + Tropeiro</span><span>R$ 25,00</span></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Lanches</h2>
+      <ul>
+        <li><span>Lanche de churrasco</span><span>R$ 15,00</span></li>
+        <li><span>Lanche completo (com queijo)</span><span>R$ 17,00</span></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Bebidas</h2>
+      <ul>
+        <li><span>Refrigerante lata</span><span>R$ 5,00</span></li>
+        <li><span>Água</span><span>R$ 3,00</span></li>
+        <li><span>Suco natural</span><span>R$ 6,00</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    Brito Espetinhos &copy; 2025
+  </footer>
+</body>
+</html>
