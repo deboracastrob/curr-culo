@@ -87,49 +87,15 @@
     <p style="font-size: 0.9rem; color: white; margin-top: 5px;">Escaneie o QR Code para acessar este cardápio no celular</p>
   </header>
 
-  <div class="section">
-    <div class="category">
-      <h2>Espetinhos</h2>
-      <ul>
-        <li><span>Espetinho de carne</span><span>R$ 6,00</span></li>
-        <li><span>Espetinho de frango</span><span>R$ 5,00</span></li>
-        <li><span>Espetinho de queijo coalho</span><span>R$ 5,00</span></li>
-        <li><span>Espetinho misto</span><span>R$ 7,00</span></li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Marmitas</h2>
-      <ul>
-        <li><span>2 Espetinhos + Arroz + Tropeiro</span><span>R$ 20,00</span></li>
-        <li><span>3 Espetinhos + Arroz + Tropeiro</span><span>R$ 25,00</span></li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Lanches</h2>
-      <ul>
-        <li><span>Lanche de churrasco</span><span>R$ 15,00</span></li>
-        <li><span>Lanche completo (com queijo)</span><span>R$ 17,00</span></li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <h2>Bebidas</h2>
-      <ul>
-        <li><span>Refrigerante lata</span><span>R$ 5,00</span></li>
-        <li><span>Água</span><span>R$ 3,00</span></li>
-        <li><span>Suco natural</span><span>R$ 6,00</span></li>
-      </ul>
-    </div>
-  </div>
+  <!-- Conteúdo do cardápio será carregado aqui -->
+  <div class="section" id="menu"></div>
 
   <footer>
     Brito Espetinhos &copy; 2025
   </footer>
 
   <script>
-    // Gera o QR Code com a URL atual da página
+    // Gera o QR Code com a URL atual
     const url = window.location.href;
     new QRCode(document.getElementById("qrcode"), {
       text: url,
@@ -138,6 +104,43 @@
       colorDark: "#000000",
       colorLight: "#ffffff",
     });
+
+    // Carrega os dados do cardapio.json
+    fetch('cardapio.json')
+      .then(response => response.json())
+      .then(data => {
+        const categorias = {
+          espetinhos: "Espetinhos",
+          marmitas: "Marmitas",
+          lanches: "Lanches",
+          bebidas: "Bebidas"
+        };
+
+        const menuDiv = document.getElementById("menu");
+
+        for (const categoria in categorias) {
+          const section = document.createElement("div");
+          section.className = "category";
+
+          const title = document.createElement("h2");
+          title.textContent = categorias[categoria];
+          section.appendChild(title);
+
+          const list = document.createElement("ul");
+          data[categoria].forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `<span>${item.nome}</span><span>${item.preco}</span>`;
+            list.appendChild(li);
+          });
+
+          section.appendChild(list);
+          menuDiv.appendChild(section);
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao carregar o cardápio:", error);
+        document.getElementById("menu").innerHTML = "<p>Não foi possível carregar o cardápio.</p>";
+      });
   </script>
 </body>
 </html>
