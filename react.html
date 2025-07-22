@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfólio React - Débora Brito</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Portfólio Noções de React</h1>
+    <p>Conceitos básicos e exemplos simples de React (sem ambiente React real)</p>
+  </header>
+
+  <section class="section">
+    <h2>Exemplo: Componente funcional simples</h2>
+    <p>React usa componentes para construir interfaces.</p>
+    <pre><code>
+function Saudacao(props) {
+  return &lt;h3&gt;Olá, {props.nome}!&lt;/h3&gt;
+}
+    </code></pre>
+  </section>
+
+  <section class="section">
+    <h2>Exemplo: Uso de estado (state)</h2>
+    <pre><code>
+import React, { useState } from 'react';
+
+function Contador() {
+  const [count, setCount] = useState(0);
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;Cliquei {count} vezes&lt;/button&gt;
+  );
+}
+    </code></pre>
+    <p>(Esse código precisa de um ambiente React para rodar.)</p>
+  </section>
+
+  <footer>
+    <p><a href="index.html">Voltar ao site principal</a></p>
+  </footer>
+</body>
+</html>
