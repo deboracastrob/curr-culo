@@ -11,67 +11,89 @@
       background-color: #fff8f0;
       color: #333;
     }
-
     header {
       background-color: #b22222;
       color: white;
       text-align: center;
       padding: 20px;
     }
-
     h1 {
       margin: 0;
       font-size: 2rem;
     }
-
     .section {
       padding: 20px;
+      max-width: 900px;
+      margin: auto;
     }
-
     .category {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
-
     .category h2 {
       border-bottom: 2px solid #b22222;
       padding-bottom: 5px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       color: #b22222;
+      font-size: 1.8rem;
     }
-
     ul {
       list-style: none;
       padding: 0;
-    }
-
-    li {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 5px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-
+    li {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      transition: transform 0.2s;
+    }
+    li:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    li img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .item-nome {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+    .item-preco {
+      color: #b22222;
+      font-weight: bold;
+      font-size: 1rem;
+    }
     footer {
       text-align: center;
       padding: 15px;
       background-color: #eee;
       font-size: 0.9rem;
     }
-
     #qrcode {
       margin: 15px auto 5px;
       width: 150px;
       height: 150px;
     }
-
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5rem;
+      ul {
+        justify-content: center;
       }
-
-      .category h2 {
-        font-size: 1.2rem;
+      li {
+        width: 90%;
       }
     }
   </style>
@@ -83,7 +105,9 @@
     <h1>Brito Espetinhos</h1>
     <p>Cardápio digital</p>
     <div id="qrcode"></div>
-    <p style="font-size: 0.9rem; color: white; margin-top: 5px;">Escaneie o QR Code para acessar este cardápio no celular</p>
+    <p style="font-size: 0.9rem; color: white; margin-top: 5px;">
+      Escaneie o QR Code para acessar este cardápio no celular
+    </p>
   </header>
 
   <div class="section" id="menu"></div>
@@ -93,6 +117,7 @@
   </footer>
 
   <script>
+    // Gera QR Code da página atual
     const url = window.location.href;
     new QRCode(document.getElementById("qrcode"), {
       text: url,
@@ -102,37 +127,37 @@
       colorLight: "#ffffff",
     });
 
-    // Dados embutidos do cardápio
+    // Dados embutidos do cardápio com imagens
     const data = {
       "espetinhos": [
-        {"nome": "Espetinho de carne", "preco": "R$ 8,00"},
-        {"nome": "Espetinho de frango", "preco": "R$ 6,00"},
-        {"nome": "Espetinho linguiça", "preco": "R$ 8,00"},
-        {"nome": "Espetinho kafta", "preco": "R$ 9,00"},
-        {"nome": "Espetinho de queijo coalho", "preco": "R$ 10,00"},
-        {"nome": "Espetinho de queijo defumado", "preco": "R$ 10,00"}
+        {"nome": "Espetinho de carne", "preco": "R$ 8,00", "img": "img/espetinho-carne.jpg"},
+        {"nome": "Espetinho de frango", "preco": "R$ 6,00", "img": "img/espetinho-frango.jpg"},
+        {"nome": "Espetinho linguiça", "preco": "R$ 8,00", "img": "img/espetinho-linguica.jpg"},
+        {"nome": "Espetinho kafta", "preco": "R$ 9,00", "img": "img/espetinho-kafta.jpg"},
+        {"nome": "Espetinho de queijo coalho", "preco": "R$ 10,00", "img": "img/espetinho-queijo-coalho.jpg"},
+        {"nome": "Espetinho de queijo defumado", "preco": "R$ 10,00", "img": "img/espetinho-queijo-defumado.jpg"}
       ],
       "marmitas": [
-        {"nome": "2 Espetinhos Frango + Arroz + Tropeiro", "preco": "R$ 25,00"},
-        {"nome": "2 Espetinhos Carne + Arroz + Tropeiro", "preco": "R$ 30,00"},
-        {"nome": "2 Espetinhos Linguiça + Arroz + Tropeiro", "preco": "R$ 26,00"},
-        {"nome": "2 Espetinhos Kafta + Arroz + Tropeiro", "preco": "R$ 28,00"}
+        {"nome": "2 Espetinhos Frango + Arroz + Tropeiro", "preco": "R$ 25,00", "img": "img/marmita-frango.jpg"},
+        {"nome": "2 Espetinhos Carne + Arroz + Tropeiro", "preco": "R$ 30,00", "img": "img/marmita-carne.jpg"},
+        {"nome": "2 Espetinhos Linguiça + Arroz + Tropeiro", "preco": "R$ 26,00", "img": "img/marmita-linguica.jpg"},
+        {"nome": "2 Espetinhos Kafta + Arroz + Tropeiro", "preco": "R$ 28,00", "img": "img/marmita-kafta.jpg"}
       ],
       "lanches": [
-        {"nome": "Lanche de churrasco", "preco": "R$ 15,00"},
-        {"nome": "Lanche completo (com queijo)", "preco": "R$ 17,00"}
+        {"nome": "Lanche de churrasco", "preco": "R$ 15,00", "img": "img/lanche-churrasco.jpg"},
+        {"nome": "Lanche completo (com queijo)", "preco": "R$ 17,00", "img": "img/lanche-completo.jpg"}
       ],
       "bebidas": [
-        {"nome": "Cola-cola 350ml", "preco": "R$ 7,00"},
-        {"nome": "Guaraná 269ml", "preco": "R$ 6,00"},
-        {"nome": "Água", "preco": "R$ 3,00"},
-        {"nome": "Imperio 269ml", "preco": "R$ 5,00"},
-        {"nome": "Skol 269ml", "preco": "R$ 5,00"},
-        {"nome": "Original 269ml", "preco": "R$ 6,50"},
-        {"nome": "Heineken 269ml", "preco": "R$ 7,00"},
-        {"nome": "Copão Gin 760ml", "preco": "R$ 10,00"},
-        {"nome": "Copão Whisky 760ml", "preco": "R$ 10,00"},
-        {"nome": "Copão Vodka 760ml", "preco": "R$ 10,00"}
+        {"nome": "Cola-cola 350ml", "preco": "R$ 7,00", "img": "img/cola-cola.jpg"},
+        {"nome": "Guaraná 269ml", "preco": "R$ 6,00", "img": "img/guarana.jpg"},
+        {"nome": "Água", "preco": "R$ 3,00", "img": "img/agua.jpg"},
+        {"nome": "Imperio 269ml", "preco": "R$ 5,00", "img": "img/imperio.jpg"},
+        {"nome": "Skol 269ml", "preco": "R$ 5,00", "img": "img/skol.jpg"},
+        {"nome": "Original 269ml", "preco": "R$ 6,50", "img": "img/original.jpg"},
+        {"nome": "Heineken 269ml", "preco": "R$ 7,00", "img": "img/heineken.jpg"},
+        {"nome": "Copão Gin 760ml", "preco": "R$ 10,00", "img": "img/copaogin.jpg"},
+        {"nome": "Copão Whisky 760ml", "preco": "R$ 10,00", "img": "img/copaowhisky.jpg"},
+        {"nome": "Copão Vodka 760ml", "preco": "R$ 10,00", "img": "img/copaovodka.jpg"}
       ]
     };
 
@@ -154,9 +179,25 @@
       section.appendChild(title);
 
       const list = document.createElement("ul");
+
       data[categoria].forEach(item => {
         const li = document.createElement("li");
-        li.innerHTML = `<span>${item.nome}</span><span>${item.preco}</span>`;
+
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.nome;
+        li.appendChild(img);
+
+        const nome = document.createElement("div");
+        nome.className = "item-nome";
+        nome.textContent = item.nome;
+        li.appendChild(nome);
+
+        const preco = document.createElement("div");
+        preco.className = "item-preco";
+        preco.textContent = item.preco;
+        li.appendChild(preco);
+
         list.appendChild(li);
       });
 
