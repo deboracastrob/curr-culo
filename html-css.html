@@ -3,46 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio HTML5 & CSS3 - Débora Brito</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Portfólio HTML5 & CSS3 | Débora Brito</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f6fc;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      color: #2b7de9;
+      margin-bottom: 5px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a.btn {
+      background-color: #2b7de9;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a.btn:hover,
+    nav a.btn:focus {
+      background-color: #1a5ec1;
+      outline: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: #2b7de9;
+      border-bottom: 3px solid #2b7de9;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+    }
+
+    p.intro {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    article.project {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    article.project:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    article.project h3 {
+      margin-top: 0;
+      color: #1b4da6;
+    }
+
+    article.project p {
+      margin-bottom: 10px;
+    }
+
+    article.project a.btn {
+      background-color: #2b7de9;
+      padding: 8px 16px;
+      font-weight: normal;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+
+    article.project a.btn:hover,
+    article.project a.btn:focus {
+      background-color: #1a5ec1;
+      outline: none;
+    }
+
+    article.project img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-top: 15px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+
+      nav a.btn {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+
+      article.project {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Portfólio HTML5 & CSS3</h1>
-    <p>Exemplos de projetos usando HTML5 e CSS3</p>
+    <h1>Portfólio de HTML5 & CSS3</h1>
+    <nav>
+      <a href="index.html" class="btn" title="Voltar ao currículo principal">← Voltar ao currículo</a>
+    </nav>
   </header>
 
-  <section class="section">
-    <h2>Projeto: Página simples responsiva</h2>
-    <p>Uma página que adapta o layout para dispositivos móveis usando media queries.</p>
-    <pre><code>
-/* Exemplo CSS */
-@media (max-width: 600px) {
-  body {
-    background-color: #f0f0f0;
-  }
-}
-    </code></pre>
-  </section>
+  <main>
+    <section>
+      <h2>Introdução</h2>
+      <p class="intro">
+        Nesta seção, você encontrará exemplos práticos dos meus projetos utilizando HTML5 semântico e CSS3 moderno, com foco em layouts responsivos, acessibilidade e design visual atraente.
+      </p>
+    </section>
 
-  <section class="section">
-    <h2>Projeto: Formulário estilizado</h2>
-    <p>Formulário com inputs customizados e efeitos visuais com CSS.</p>
-    <pre><code>
-input[type="text"] {
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 4px;
-}
-input[type="text"]:focus {
-  border-color: #2b7de9;
-  outline: none;
-}
-    </code></pre>
-  </section>
+    <section>
+      <h2>Projetos</h2>
+
+      <article class="project">
+        <h3>Landing Page Responsiva</h3>
+        <p>Projeto que utiliza Flexbox e CSS Grid para criar um layout que se adapta perfeitamente a diferentes tamanhos de tela.</p>
+        <a href="https://exemplo.com/projeto1" target="_blank" rel="noopener" class="btn" title="Abrir projeto Landing Page Responsiva">Ver projeto</a>
+        <img src="imagens/projeto1-screenshot.png" alt="Screenshot do projeto Landing Page Responsiva" />
+      </article>
+
+      <article class="project">
+        <h3>Formulário de Contato Estilizado</h3>
+        <p>Um formulário acessível e estilizado com CSS3 puro, incluindo efeitos visuais de foco e validação simples.</p>
+        <a href="https://exemplo.com/projeto2" target="_blank" rel="noopener" class="btn" title="Abrir projeto Formulário de Contato">Ver projeto</a>
+        <img src="imagens/projeto2-screenshot.png" alt="Screenshot do projeto Formulário de Contato Estilizado" />
+      </article>
+
+      <article class="project">
+        <h3>Galeria de Imagens com CSS Grid</h3>
+        <p>Galeria responsiva e elegante usando CSS Grid, com efeitos de hover e adaptação para dispositivos móveis.</p>
+        <a href="https://exemplo.com/projeto3" target="_blank" rel="noopener" class="btn" title="Abrir projeto Galeria de Imagens">Ver projeto</a>
+        <img src="imagens/projeto3-screenshot.png" alt="Screenshot do projeto Galeria de Imagens com CSS Grid" />
+      </article>
+    </section>
+  </main>
 
   <footer>
-    <p><a href="index.html">Voltar ao site principal</a></p>
+    <p style="text-align:center; margin-top: 40px; color:#666;">Débora Brito &copy; 2025</p>
   </footer>
 </body>
 </html>
