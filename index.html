@@ -35,3 +35,90 @@
     <p>Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)</p>
   </section>
 
+  <section class="section">
+    <h2>Experiência</h2>
+    <p><strong>Estágio em Suporte Técnico - Empresa ABC</strong> (2022-2023)<br/>
+    Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.</p>
+
+    <p><strong>Assistente de TI - Empresa XYZ</strong> (2021-2022)<br/>
+    Atuação no monitoramento de sistemas, controle de ativos de TI e suporte técnico aos colaboradores, garantindo a continuidade operacional dos serviços de tecnologia.</p>
+  </section>
+
+  <!-- Botão para baixar PDF -->
+  <section class="section">
+    <button id="btnDownload">Baixar currículo em PDF</button>
+  </section>
+
+  <footer>
+    <p>Débora Brito &copy; 2025</p>
+  </footer>
+
+  <script>
+    window.onload = () => {
+      const { jsPDF } = window.jspdf;
+      const btn = document.getElementById('btnDownload');
+
+      btn.addEventListener('click', () => {
+        const doc = new jsPDF();
+
+        let y = 20;
+
+        doc.setFontSize(22);
+        doc.text("Débora Brito", 10, y);
+        y += 10;
+        doc.setFontSize(16);
+        doc.text("Desenvolvedora Front-End em transição", 10, y);
+        y += 15;
+
+        doc.setFontSize(14);
+        doc.text("Objetivo:", 10, y);
+        y += 8;
+        doc.setFontSize(12);
+        doc.text("Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.", 10, y, {maxWidth: 190});
+        y += 20;
+
+        doc.setFontSize(14);
+        doc.text("Habilidades Técnicas:", 10, y);
+        y += 8;
+        doc.setFontSize(12);
+        const habilidades = [
+          "HTML5, CSS3, JavaScript",
+          "Git e GitHub",
+          "Noções de React",
+          "Lógica com C e Python (CS50)",
+          "UI/UX • Figma",
+          "Hardware e Redes"
+        ];
+        habilidades.forEach(hab => {
+          doc.text("• " + hab, 15, y);
+          y += 7;
+        });
+        y += 5;
+
+        doc.setFontSize(14);
+        doc.text("Formação:", 10, y);
+        y += 8;
+        doc.setFontSize(12);
+        doc.text("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)", 10, y, {maxWidth: 190});
+        y += 20;
+
+        doc.setFontSize(14);
+        doc.text("Experiência:", 10, y);
+        y += 8;
+        doc.setFontSize(12);
+        const experiencias = [
+          "Estágio em Suporte Técnico - Empresa ABC (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.",
+          "Assistente de TI - Empresa XYZ (2021-2022): Atuação no monitoramento de sistemas, controle de ativos de TI e suporte técnico aos colaboradores, garantindo a continuidade operacional dos serviços de tecnologia."
+        ];
+        experiencias.forEach(exp => {
+          let splitText = doc.splitTextToSize(exp, 190);
+          doc.text(splitText, 10, y);
+          y += splitText.length * 7 + 5;
+        });
+
+        doc.save('curriculo.pdf');
+      });
+    };
+  </script>
+</body>
+</html>
