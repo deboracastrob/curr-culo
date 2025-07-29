@@ -14,10 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Variável para guardar o idioma atual (padrão pt)
   let currentLang = 'pt';
 
-  // Atualiza currentLang ao clicar nos botões de idioma e traduz página
   const buttons = document.querySelectorAll('#languageSwitcher button');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Traduções para a página (simplificado para focar no principal)
   const translations = {
     pt: {
       headerTitle: "Débora Brito",
@@ -36,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       htmlCss: "HTML5 & CSS3",
       projetoHtmlCss: "Projeto geral de HTML5 & CSS3",
       cardapioEspetinhos: "Cardápio com QR Code",
+      tecnologiasUsadasTexto: "(clique aqui para ver as tecnologias usadas)",
       tecnologiasUsadas: "Tecnologias usadas:",
       techList1: "HTML5 – Estrutura da página",
       techList2: "CSS3 – Estilização visual e responsividade",
@@ -63,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       htmlCss: "HTML5 & CSS3",
       projetoHtmlCss: "General HTML5 & CSS3 project",
       cardapioEspetinhos: "Menu with QR Code",
+      tecnologiasUsadasTexto: "(click here to see used technologies)",
       tecnologiasUsadas: "Technologies used:",
       techList1: "HTML5 – Page structure",
       techList2: "CSS3 – Visual styling and responsiveness",
@@ -101,19 +100,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const submenuLis = lis[0].querySelectorAll('ul.submenu li');
     submenuLis[0].querySelector('a').textContent = t.projetoHtmlCss;
 
-    // Aqui corrigido: usando id para evitar sobrescrever múltiplos links
-    document.getElementById('cardapioLink').textContent = t.cardapioEspetinhos;
+    // Atualiza apenas o link principal do cardápio com id
+    const cardapioLink = document.getElementById('cardapioLink');
+    if(cardapioLink) cardapioLink.textContent = t.cardapioEspetinhos;
 
-    submenuLis[1].querySelector('span a').textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
+    // Atualiza o texto do toggle para tecnologias usadas
+    if(toggleLink) toggleLink.textContent = t.tecnologiasUsadasTexto;
 
     const techBox = document.getElementById('cardapioInfo');
-    const techLis = techBox.querySelectorAll('ul li');
-    techLis[0].textContent = t.techList1;
-    techLis[1].textContent = t.techList2;
-    techLis[2].textContent = t.techList3;
-    techLis[3].textContent = t.techList4;
-    techLis[4].textContent = t.techList5;
-    techLis[5].textContent = t.techList6;
+    if(techBox){
+      const techLis = techBox.querySelectorAll('ul li');
+      techLis[0].textContent = t.techList1;
+      techLis[1].textContent = t.techList2;
+      techLis[2].textContent = t.techList3;
+      techLis[3].textContent = t.techList4;
+      techLis[4].textContent = t.techList5;
+      techLis[5].textContent = t.techList6;
+    }
 
     lis[1].querySelector('a').textContent = t.javascript;
     lis[2].querySelector('a').textContent = t.nocoesReact;
@@ -132,10 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('footer p').textContent = t.footerText;
   }
 
-  // Inicializa a página em português
   translatePage(currentLang);
 
-  // Gerar PDF ao clicar no botão
   const { jsPDF } = window.jspdf;
   const btn = document.getElementById('btnDownload');
 
@@ -202,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
       y += 5;
     }
 
-    // Conteúdo do PDF
     doc.setFontSize(22);
     doc.setFont("helvetica", "bold");
     doc.text(t.headerTitle, leftMargin, y);
@@ -212,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     doc.text(t.headerSubtitle, leftMargin, y);
     y += 15;
 
-    // Exemplo de conteúdo para o PDF
     addTitle(t.objetivoTitle || "Objetivo");
     addParagraph(t.objetivoText || "Atuar como Desenvolvedora Front-End Júnior...");
 
