@@ -54,8 +54,10 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
+            <!-- Id adicionado para facilitar a tradução -->
             <a href="brito-espetinhos.html" target="_blank" id="linkCardapio">Cardápio com QR Code</a>
             <span style="margin-left: 8px;">
+              <!-- Id para toggle do quadro -->
               <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo" style="color: #2b7de9; text-decoration: underline;">
                 (clique aqui para ver as tecnologias usadas)
               </a>
@@ -75,7 +77,6 @@
         </ul>
       </li>
       <li><a href="javascript.html">JavaScript</a></li>
-      <!-- Link duplicado removido -->
       <li><a href="react.html">Noções de React</a></li>
       <li><a href="logica.html">Lógica com C e Python (CS50)</a></li>
       <li><a href="ui-ux.html">UI/UX com Figma</a></li>
@@ -167,35 +168,42 @@
       document.querySelector('section:nth-of-type(1) h2').textContent = translations[lang].portfolioTitle;
       document.querySelector('section:nth-of-type(1) > p').textContent = translations[lang].portfolioDesc;
 
-      const ul = document.querySelector('section:nth-of-type(1) ul');
-      const lis = ul.querySelectorAll('li');
+      // Atualiza o texto do link cardapio via id
+      const linkCardapio = document.getElementById('linkCardapio');
+      if (linkCardapio) {
+        linkCardapio.textContent = translations[lang].cardapioEspetinhos;
+      }
 
-      lis[0].querySelector('span.no-link').textContent = translations[lang].htmlCss;
-
-      const submenuLis = lis[0].querySelectorAll('ul.submenu li');
-      submenuLis[0].querySelector('a').textContent = translations[lang].projetoHtmlCss;
-      submenuLis[1].querySelector('a').textContent = translations[lang].cardapioEspetinhos;
-
-      // Atualiza o texto do toggle (link ao lado)
+      // Atualiza o texto do toggle do quadro
       const toggleLink = document.getElementById('toggleCardapioInfo');
       if (toggleLink) {
         toggleLink.textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
       }
 
+      // Atualiza a lista das tecnologias no quadro
       const techBox = document.getElementById('cardapioInfo');
-      const techLis = techBox.querySelectorAll('ul li');
-      techLis[0].textContent = translations[lang].techList1;
-      techLis[1].textContent = translations[lang].techList2;
-      techLis[2].textContent = translations[lang].techList3;
-      techLis[3].textContent = translations[lang].techList4;
-      techLis[4].textContent = translations[lang].techList5;
-      techLis[5].textContent = translations[lang].techList6;
+      if (techBox) {
+        const techLis = techBox.querySelectorAll('ul li');
+        techLis[0].textContent = translations[lang].techList1;
+        techLis[1].textContent = translations[lang].techList2;
+        techLis[2].textContent = translations[lang].techList3;
+        techLis[3].textContent = translations[lang].techList4;
+        techLis[4].textContent = translations[lang].techList5;
+        techLis[5].textContent = translations[lang].techList6;
+      }
 
-      lis[1].querySelector('a').textContent = translations[lang].javascript;
-      lis[2].querySelector('a').textContent = translations[lang].nocoesReact;
-      lis[3].querySelector('a').textContent = translations[lang].logica;
-      lis[4].querySelector('a').textContent = translations[lang].uiUx;
-      lis[5].querySelector('a').textContent = translations[lang].hardwareRedes;
+      // Atualiza os outros links do menu principal, usando seletores fixos
+      const menuLinks = [
+        {selector: 'a[href="javascript.html"]', text: translations[lang].javascript},
+        {selector: 'a[href="react.html"]', text: translations[lang].nocoesReact},
+        {selector: 'a[href="logica.html"]', text: translations[lang].logica},
+        {selector: 'a[href="ui-ux.html"]', text: translations[lang].uiUx},
+        {selector: 'a[href="hardware-redes.html"]', text: translations[lang].hardwareRedes}
+      ];
+      menuLinks.forEach(item => {
+        const el = document.querySelector(item.selector);
+        if (el) el.textContent = item.text;
+      });
 
       document.querySelector('section:nth-of-type(2) h2').textContent = translations[lang].formacaoTitle;
       document.querySelector('section:nth-of-type(2) p').textContent = translations[lang].formacaoDesc;
@@ -211,16 +219,16 @@
     document.addEventListener('DOMContentLoaded', () => {
       translatePage('pt');
 
-      const buttons = document.querySelectorAll('#languageSwitcher button');
-      buttons.forEach(btn => {
+      // Botões para trocar idioma
+      document.querySelectorAll('#languageSwitcher button').forEach(btn => {
         btn.addEventListener('click', () => {
           translatePage(btn.getAttribute('data-lang'));
         });
       });
 
+      // Toggle para mostrar/esconder o quadro com tecnologias
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
-
       if (toggleLink && infoBox) {
         toggleLink.addEventListener('click', (e) => {
           e.preventDefault();
