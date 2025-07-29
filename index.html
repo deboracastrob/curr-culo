@@ -6,8 +6,33 @@
   <title>Débora Brito | Desenvolvedora Front-End</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    #languageSwitcher {
+      text-align: right;
+      margin: 10px 20px;
+    }
+    #languageSwitcher button {
+      background-color: #2b7de9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 14px;
+      margin-left: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #languageSwitcher button:hover {
+      background-color: #1a5ec8;
+    }
+  </style>
 </head>
 <body>
+  <div id="languageSwitcher">
+    <button data-lang="pt">Português</button>
+    <button data-lang="en">English</button>
+  </div>
+
   <header>
     <h1>Débora Brito</h1>
     <p>Desenvolvedora Front-End em transição</p>
@@ -75,8 +100,112 @@
   </footer>
 
   <script>
-    // Mostrar/esconder o quadro de tecnologias do cardápio
+    const translations = {
+      pt: {
+        headerTitle: "Débora Brito",
+        headerSubtitle: "Desenvolvedora Front-End em transição",
+        portfolioTitle: "Portfólio de Conhecimentos",
+        portfolioDesc: "Acesse meus projetos e exemplos práticos em cada área:",
+        htmlCss: "HTML5 & CSS3",
+        projetoHtmlCss: "Projeto geral de HTML5 & CSS3",
+        cardapioEspetinhos: "Cardápio Brito Espetinhos",
+        tecnologiasUsadas: "Tecnologias usadas:",
+        techList1: "HTML5 – Estrutura da página",
+        techList2: "CSS3 – Estilização visual e responsividade",
+        techList3: "JavaScript – Manipulação dinâmica do conteúdo e interação",
+        techList4: "JSON – Dados do cardápio carregados dinamicamente",
+        techList5: "QRCode.js – Geração do QR Code",
+        techList6: "GitHub Pages – Hospedagem gratuita do projeto",
+        javascript: "JavaScript",
+        nocoesReact: "Noções de React",
+        logica: "Lógica com C e Python (CS50)",
+        uiUx: "UI/UX com Figma",
+        hardwareRedes: "Hardware e Redes",
+        formacaoTitle: "Formação",
+        formacaoDesc: "Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)",
+        experienciaTitle: "Experiência",
+        experienciaDesc: "Assistente analista de sistemas - Arklok (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.",
+        btnDownload: "Baixar currículo em PDF",
+        footerText: "Débora Brito © 2025"
+      },
+      en: {
+        headerTitle: "Débora Brito",
+        headerSubtitle: "Front-End Developer in transition",
+        portfolioTitle: "Portfolio of Skills",
+        portfolioDesc: "Access my projects and practical examples in each area:",
+        htmlCss: "HTML5 & CSS3",
+        projetoHtmlCss: "General HTML5 & CSS3 project",
+        cardapioEspetinhos: "Brito Espetinhos Menu",
+        tecnologiasUsadas: "Technologies used:",
+        techList1: "HTML5 – Page structure",
+        techList2: "CSS3 – Visual styling and responsiveness",
+        techList3: "JavaScript – Dynamic content manipulation and interaction",
+        techList4: "JSON – Menu data loaded dynamically",
+        techList5: "QRCode.js – QR Code generation",
+        techList6: "GitHub Pages – Free project hosting",
+        javascript: "JavaScript",
+        nocoesReact: "Basics of React",
+        logica: "Logic with C and Python (CS50)",
+        uiUx: "UI/UX with Figma",
+        hardwareRedes: "Hardware and Networks",
+        formacaoTitle: "Education",
+        formacaoDesc: "Technologist in Systems Analysis and Development – Anhembi Morumbi (in progress)",
+        experienciaTitle: "Experience",
+        experienciaDesc: "Assistant systems analyst - Arklok (2022-2023): Responsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance.",
+        btnDownload: "Download resume as PDF",
+        footerText: "Débora Brito © 2025"
+      }
+    };
+
+    function translatePage(lang) {
+      document.querySelector('header h1').textContent = translations[lang].headerTitle;
+      document.querySelector('header p').textContent = translations[lang].headerSubtitle;
+
+      document.querySelector('section:nth-of-type(1) h2').textContent = translations[lang].portfolioTitle;
+      document.querySelector('section:nth-of-type(1) > p').textContent = translations[lang].portfolioDesc;
+
+      const ul = document.querySelector('section:nth-of-type(1) ul');
+      const lis = ul.querySelectorAll('li');
+
+      // Atualiza o texto do HTML5 & CSS3 (não link)
+      lis[0].querySelector('span.no-link').textContent = translations[lang].htmlCss;
+
+      // Submenu - atualiza textos
+      const submenuLis = lis[0].querySelectorAll('ul.submenu li');
+      submenuLis[0].querySelector('a').textContent = translations[lang].projetoHtmlCss;
+      submenuLis[1].querySelector('a').textContent = translations[lang].cardapioEspetinhos;
+      // Também o texto do "(clique aqui para ver...)"
+      submenuLis[1].querySelector('span a').textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
+
+      // Quadro de tecnologias
+      const techBox = document.getElementById('cardapioInfo');
+      const techLis = techBox.querySelectorAll('ul li');
+      techLis[0].textContent = translations[lang].techList1;
+      techLis[1].textContent = translations[lang].techList2;
+      techLis[2].textContent = translations[lang].techList3;
+      techLis[3].textContent = translations[lang].techList4;
+      techLis[4].textContent = translations[lang].techList5;
+      techLis[5].textContent = translations[lang].techList6;
+
+      lis[1].querySelector('a').textContent = translations[lang].javascript;
+      lis[2].querySelector('a').textContent = translations[lang].nocoesReact;
+      lis[3].querySelector('a').textContent = translations[lang].logica;
+      lis[4].querySelector('a').textContent = translations[lang].uiUx;
+      lis[5].querySelector('a').textContent = translations[lang].hardwareRedes;
+
+      document.querySelector('section:nth-of-type(2) h2').textContent = translations[lang].formacaoTitle;
+      document.querySelector('section:nth-of-type(2) p').textContent = translations[lang].formacaoDesc;
+
+      document.querySelector('section:nth-of-type(3) h2').textContent = translations[lang].experienciaTitle;
+      document.querySelector('section:nth-of-type(3) p').innerHTML = translations[lang].experienciaDesc;
+
+      document.querySelector('section:nth-of-type(4) button').textContent = translations[lang].btnDownload;
+
+      document.querySelector('footer p').textContent = translations[lang].footerText;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Botão para mostrar/esconder quadro tecnologias
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
@@ -85,6 +214,14 @@
         const isOpen = infoBox.style.display === 'block';
         infoBox.style.display = isOpen ? 'none' : 'block';
         toggleLink.setAttribute('aria-expanded', !isOpen);
+      });
+
+      // Botões de idioma
+      const buttons = document.querySelectorAll('#languageSwitcher button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          translatePage(btn.getAttribute('data-lang'));
+        });
       });
     });
 
