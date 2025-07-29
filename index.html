@@ -205,15 +205,20 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Botão para mostrar/esconder quadro tecnologias
+      // Toggle tecnologias
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
       toggleLink.addEventListener('click', (e) => {
         e.preventDefault();
-        const isOpen = infoBox.style.display === 'block';
-        infoBox.style.display = isOpen ? 'none' : 'block';
-        toggleLink.setAttribute('aria-expanded', !isOpen);
+        const isOpen = infoBox.classList.contains('show');
+        if (isOpen) {
+          infoBox.classList.remove('show');
+          toggleLink.setAttribute('aria-expanded', 'false');
+        } else {
+          infoBox.classList.add('show');
+          toggleLink.setAttribute('aria-expanded', 'true');
+        }
       });
 
       // Botões de idioma
@@ -223,6 +228,9 @@
           translatePage(btn.getAttribute('data-lang'));
         });
       });
+
+      // Inicializa a página em português
+      translatePage('pt');
     });
 
     // Geração de PDF com jsPDF
