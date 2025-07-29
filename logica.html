@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio Lógica com C e Python - Débora Brito</title>
   <style>
-    /* Reset básico */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -103,14 +100,15 @@
       padding: 15px 20px;
       color: #003a75;
       font-weight: 600;
-      min-height: 60px;
       margin-top: 15px;
       font-size: 1.1em;
+      min-height: auto;
+      /* para o texto ocupar só o que precisa */
     }
     .explanation {
       background: #e7f0ff;
       border-left: 6px solid #2b7de9;
-      padding: 15px 20px;
+      padding: 20px;
       margin-bottom: 30px;
       font-size: 1rem;
       color: #004080;
@@ -150,7 +148,6 @@
     footer a:hover {
       color: #155abf;
     }
-    /* Responsivo */
     @media (max-width: 480px) {
       body {
         padding: 15px 12px;
@@ -209,7 +206,7 @@ else:
   <section class="section">
     <h2>Projeto interativo: Verificar par/ímpar e calcular fatorial</h2>
     <form id="logicForm">
-      <input type="number" id="numberInput" placeholder="Digite um número inteiro" required />
+      <input type="number" id="numberInput" placeholder="Digite um número inteiro (0-20)" min="0" max="20" required />
       <button type="submit">Verificar</button>
     </form>
     <div id="resultParImpar"></div>
@@ -236,7 +233,7 @@ else:
 
   <script>
     function calculaFatorial(n) {
-      if (n < 0) return null; // fatorial não definido para negativos
+      if (n < 0) return null;
       if (n === 0 || n === 1) return 1;
       let fat = 1;
       for (let i = 2; i <= n; i++) {
@@ -247,27 +244,22 @@ else:
 
     document.getElementById('logicForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const num = parseInt(document.getElementById('numberInput').value, 10);
+      const inputEl = document.getElementById('numberInput');
+      const num = parseInt(inputEl.value, 10);
       const resultParImpar = document.getElementById('resultParImpar');
       const resultFatorial = document.getElementById('resultFatorial');
 
-      if (isNaN(num)) {
-        resultParImpar.textContent = "Por favor, digite um número válido.";
+      if (isNaN(num) || num < 0 || num > 20) {
+        resultParImpar.textContent = "Por favor, digite um número inteiro entre 0 e 20.";
         resultFatorial.textContent = "";
         return;
       }
 
-      // Verificar par ou ímpar
       const parOuImpar = (num % 2 === 0) ? "par" : "ímpar";
       resultParImpar.textContent = `O número ${num} é ${parOuImpar}.`;
 
-      // Calcular fatorial
       const fat = calculaFatorial(num);
-      if (fat === null) {
-        resultFatorial.textContent = "Fatorial não definido para números negativos.";
-      } else {
-        resultFatorial.textContent = `Fatorial de ${num} é ${fat}.`;
-      }
+      resultFatorial.textContent = `Fatorial de ${num} é ${fat}.`;
     });
   </script>
 </body>
