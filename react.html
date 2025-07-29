@@ -4,33 +4,177 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio React - Débora Brito</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #2b7de9;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .section {
+      background: white;
+      padding: 20px 25px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(43, 125, 233, 0.15);
+    }
+
+    .section h2 {
+      color: #2b7de9;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #2b7de9;
+      padding-bottom: 6px;
+    }
+
+    pre {
+      background: #f0f3f7;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #1e1e1e;
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    form {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    #weatherForm input[type="text"] {
+      flex-grow: 1;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 2px solid #2b7de9;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+      min-width: 180px;
+    }
+
+    #weatherForm input[type="text"]:focus {
+      border-color: #155abf;
+      outline: none;
+    }
+
+    #weatherForm button {
+      padding: 10px 18px;
+      font-size: 1rem;
+      background-color: #2b7de9;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      min-width: 120px;
+    }
+
+    #weatherForm button:hover {
+      background-color: #155abf;
+    }
+
     #weatherResult {
+      background: #e1f0ff;
+      border: 1px solid #2b7de9;
+      border-radius: 8px;
+      padding: 15px 20px;
+      color: #003a75;
+      font-weight: 600;
+      min-height: 60px;
       margin-top: 15px;
       font-size: 1.1em;
     }
+
     #weatherResult img {
       vertical-align: middle;
       width: 50px;
       height: 50px;
+      margin-right: 10px;
     }
-    #weatherForm input, #weatherForm button {
-      padding: 8px;
-      font-size: 1em;
-      margin-right: 6px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+
+    .section ul {
+      list-style-type: disc;
+      padding-left: 20px;
     }
-    #weatherForm button {
-      cursor: pointer;
-      background-color: #2b7de9;
-      color: white;
-      border: none;
-      transition: background-color 0.3s ease;
+
+    .section ul li {
+      margin-bottom: 8px;
+      font-size: 1rem;
     }
-    #weatherForm button:hover {
-      background-color: #1a5ec8;
+
+    .section ul li strong {
+      color: #2b7de9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: #2b7de9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #155abf;
+    }
+
+    /* Responsivo */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 12px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .section h2 {
+        font-size: 1.5rem;
+      }
+      form {
+        flex-direction: column;
+      }
+      #weatherForm button {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -111,7 +255,7 @@ function Contador() {
       <li><strong>JavaScript:</strong> Simulação de React com funções e consumo de API.</li>
       <li><strong>API OpenWeatherMap:</strong> Para obter o clima atual da cidade.</li>
       <li><strong>HTML5:</strong> Estrutura da interface.</li>
-      <li><strong>CSS3:</strong> (Aplicado via style.css) Estilização da página.</li>
+      <li><strong>CSS3:</strong> Estilização da página via estilo embutido.</li>
     </ul>
   </section>
 
