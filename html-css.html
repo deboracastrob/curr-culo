@@ -26,7 +26,6 @@
     section.project h2 {
       color: #2b7de9;
     }
-    /* Projeto 1 - Portfolio pessoal */
     .portfolio {
       display: flex;
       flex-wrap: wrap;
@@ -45,7 +44,6 @@
       transform: translateY(-8px);
       box-shadow: 0 6px 12px rgb(0 0 0 / 0.15);
     }
-    /* Projeto 2 - Galeria */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
@@ -82,7 +80,6 @@
     .gallery figure:hover figcaption {
       opacity: 1;
     }
-    /* Projeto 3 - Formulário */
     form {
       max-width: 400px;
       margin: 0 auto;
@@ -124,6 +121,25 @@
     }
     form button:hover {
       background-color: #1a5ad8;
+    }
+
+    /* Estilo do quadro de tecnologias */
+    section.tecnologias {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-left: 5px solid #2b7de9;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    section.tecnologias h2 {
+      color: #2b7de9;
+      margin-top: 0;
+    }
+    section.tecnologias ul {
+      padding-left: 20px;
+      line-height: 1.6;
     }
   </style>
 </head>
@@ -188,6 +204,19 @@
       
       <button type="submit">Enviar</button>
     </form>
+  </section>
+
+  <!-- Tecnologias usadas -->
+  <section class="tecnologias">
+    <h2>🔧 Tecnologias Usadas Nesta Página</h2>
+    <ul>
+      <li><strong>HTML5</strong> — Estrutura semântica da página</li>
+      <li><strong>CSS3</strong> — Estilização e layout responsivo</li>
+      <li><strong>Flexbox</strong> — Alinhamento e distribuição dos elementos</li>
+      <li><strong>CSS Grid</strong> — Organização da galeria de fotos</li>
+      <li><strong>Media Queries</strong> — Adaptação para diferentes tamanhos de tela</li>
+      <li><strong>GitHub Pages</strong> — Hospedagem do site</li>
+    </ul>
   </section>
 
 </body>
