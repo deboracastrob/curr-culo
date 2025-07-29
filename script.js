@@ -1,4 +1,3 @@
-// Mostrar/esconder o quadro de tecnologias do cardápio
 document.addEventListener('DOMContentLoaded', () => {
   const toggleLink = document.getElementById('toggleCardapioInfo');
   const infoBox = document.getElementById('cardapioInfo');
@@ -14,14 +13,65 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleLink.setAttribute('aria-expanded', 'true');
     }
   });
-});
 
-// Geração de PDF com jsPDF
-window.onload = () => {
+  // Variável para guardar o idioma atual (padrão pt)
+  let currentLang = 'pt';
+
+  // Atualiza currentLang ao clicar nos botões de idioma
+  const buttons = document.querySelectorAll('#languageSwitcher button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentLang = btn.getAttribute('data-lang');
+    });
+  });
+
   const { jsPDF } = window.jspdf;
   const btn = document.getElementById('btnDownload');
 
   btn.addEventListener('click', () => {
+    const translations = {
+      pt: {
+        headerTitle: "Débora Brito",
+        headerSubtitle: "Desenvolvedora Front-End em transição",
+        objetivoTitle: "Objetivo",
+        objetivoText: "Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.",
+        habilidadesTitle: "Habilidades Técnicas",
+        habilidadesList: [
+          "HTML5, CSS3, JavaScript",
+          "Git e GitHub",
+          "Noções de React",
+          "Lógica com C e Python (CS50)",
+          "UI/UX • Figma",
+          "Hardware e Redes"
+        ],
+        formacaoTitle: "Formação",
+        formacaoText: "Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)",
+        experienciaTitle: "Experiência",
+        experienciaText: "Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa."
+      },
+      en: {
+        headerTitle: "Débora Brito",
+        headerSubtitle: "Front-End Developer in transition",
+        objetivoTitle: "Objective",
+        objetivoText: "To work as a Junior Front-End Developer, applying my knowledge in HTML, CSS, JavaScript and programming logic to create functional and accessible interfaces.",
+        habilidadesTitle: "Technical Skills",
+        habilidadesList: [
+          "HTML5, CSS3, JavaScript",
+          "Git and GitHub",
+          "Basics of React",
+          "Logic with C and Python (CS50)",
+          "UI/UX • Figma",
+          "Hardware and Networks"
+        ],
+        formacaoTitle: "Education",
+        formacaoText: "Technologist in Systems Analysis and Development – Anhembi Morumbi (in progress)",
+        experienciaTitle: "Experience",
+        experienciaText: "Assistant systems analyst - Arklok (2022-2023):\nResponsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance."
+      }
+    };
+
+    const t = translations[currentLang] || translations.pt;
+
     const doc = new jsPDF();
     const pageHeight = doc.internal.pageSize.height;
     let y = 20;
@@ -64,7 +114,7 @@ window.onload = () => {
           doc.text(line, leftMargin, y);
           y += 7;
         });
-        y += 5; // espaço extra entre parágrafos
+        y += 5;
       });
     }
 
@@ -82,35 +132,28 @@ window.onload = () => {
       y += 5;
     }
 
-    // Conteúdo do PDF
+    // Gerar PDF com textos traduzidos
     doc.setFontSize(22);
     doc.setFont("helvetica", "bold");
-    doc.text("Débora Brito", leftMargin, y);
+    doc.text(t.headerTitle, leftMargin, y);
     y += 12;
     doc.setFontSize(16);
     doc.setFont("helvetica", "normal");
-    doc.text("Desenvolvedora Front-End em transição", leftMargin, y);
+    doc.text(t.headerSubtitle, leftMargin, y);
     y += 15;
 
-    addTitle("Objetivo");
-    addParagraph("Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.");
+    addTitle(t.objetivoTitle);
+    addParagraph(t.objetivoText);
 
-    addTitle("Habilidades Técnicas");
-    addBulletList([
-      "HTML5, CSS3, JavaScript",
-      "Git e GitHub",
-      "Noções de React",
-      "Lógica com C e Python (CS50)",
-      "UI/UX • Figma",
-      "Hardware e Redes"
-    ]);
+    addTitle(t.habilidadesTitle);
+    addBulletList(t.habilidadesList);
 
-    addTitle("Formação");
-    addParagraph("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)");
+    addTitle(t.formacaoTitle);
+    addParagraph(t.formacaoText);
 
-    addTitle("Experiência");
-    addParagraphWithLineBreaks("Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.");
+    addTitle(t.experienciaTitle);
+    addParagraphWithLineBreaks(t.experienciaText);
 
-    doc.save('curriculo.pdf');
+    doc.save(currentLang === 'pt' ? 'curriculo.pdf' : 'resume.pdf');
   });
 };
