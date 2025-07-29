@@ -5,12 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio JavaScript - Débora Brito</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header h1 {
+      color: #2b7de9;
+    }
+    .section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 10px;
+      margin: 20px 0;
+      justify-content: center;
+    }
+    .cell {
+      background: white;
+      border: 2px solid #2b7de9;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .cell:hover {
+      background-color: #d0e4ff;
+    }
+    .cell.disabled {
+      cursor: default;
+      color: #555;
+    }
+    #status {
+      font-weight: bold;
+      font-size: 1.2rem;
+      min-height: 1.5em;
+      text-align: center;
+      margin-top: 10px;
+      color: #2b7de9;
+    }
+    #restartBtn {
+      display: block;
+      margin: 15px auto 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #2b7de9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #restartBtn:hover {
+      background-color: #1a5ec8;
+    }
+    /* Quadro tecnologias */
+    #techBox {
+      background-color: #eef6ff;
+      border: 1px solid #a3c1f7;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-size: 0.95rem;
+      color: #1a3e72;
+    }
+    #techBox h3 {
+      margin-top: 0;
+      color: #2b7de9;
+    }
+    #techBox ul {
+      padding-left: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Portfólio JavaScript</h1>
     <p>Exemplos práticos usando JavaScript</p>
   </header>
+
+  <section class="section">
+    <h2>Projeto: Jogo da Velha (Tic-Tac-Toe)</h2>
+    <div id="status" aria-live="polite" aria-atomic="true">Jogador X começa</div>
+    <div id="game" role="grid" aria-label="Tabuleiro do jogo da velha">
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="0"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="1"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="2"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="3"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="4"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="5"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="6"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="7"></div>
+      <div class="cell" role="gridcell" tabindex="0" data-cell-index="8"></div>
+    </div>
+    <button id="restartBtn" aria-label="Reiniciar jogo da velha">Reiniciar Jogo</button>
+
+    <div id="techBox" aria-label="Tecnologias usadas no projeto do jogo da velha">
+      <h3>Tecnologias usadas e suas funções</h3>
+      <ul>
+        <li><strong>HTML:</strong> Estrutura do tabuleiro e elementos interativos.</li>
+        <li><strong>CSS:</strong> Estilização visual, layout em grade e efeitos visuais.</li>
+        <li><strong>JavaScript:</strong> Lógica do jogo, manipulação do DOM, eventos e acessibilidade.</li>
+      </ul>
+    </div>
+  </section>
 
   <section class="section">
     <h2>Projeto: Contador simples</h2>
@@ -55,5 +166,113 @@
   <footer>
     <p><a href="index.html">Voltar ao site principal</a></p>
   </footer>
+
+  <script>
+    (() => {
+      const game = document.getElementById('game');
+      const cells = Array.from(document.querySelectorAll('.cell'));
+      const status = document.getElementById('status');
+      const restartBtn = document.getElementById('restartBtn');
+
+      let board = ["", "", "", "", "", "", "", "", ""];
+      let currentPlayer = "X";
+      let isGameActive = true;
+
+      const winningConditions = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+      ];
+
+      function handleCellClick(e) {
+        const cell = e.target;
+        const index = parseInt(cell.getAttribute('data-cell-index'));
+
+        if (board[index] !== "" || !isGameActive) {
+          return;
+        }
+
+        updateCell(cell, index);
+        checkResult();
+      }
+
+      function updateCell(cell, index) {
+        board[index] = currentPlayer;
+        cell.textContent = currentPlayer;
+        cell.classList.add('disabled');
+      }
+
+      function changePlayer() {
+        currentPlayer = (currentPlayer === "X") ? "O" : "X";
+        status.textContent = `Vez do jogador ${currentPlayer}`;
+      }
+
+      function checkResult() {
+        let roundWon = false;
+
+        for (let condition of winningConditions) {
+          const [a, b, c] = condition;
+          if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+            roundWon = true;
+            break;
+          }
+        }
+
+        if (roundWon) {
+          status.textContent = `Jogador ${currentPlayer} venceu! 🎉`;
+          isGameActive = false;
+          highlightWinningCells();
+          return;
+        }
+
+        if (!board.includes("")) {
+          status.textContent = "Empate! 🤝";
+          isGameActive = false;
+          return;
+        }
+
+        changePlayer();
+      }
+
+      function highlightWinningCells() {
+        for (let condition of winningConditions) {
+          const [a, b, c] = condition;
+          if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+            [a, b, c].forEach(i => cells[i].style.backgroundColor = '#90ee90');
+          }
+        }
+      }
+
+      function restartGame() {
+        board.fill("");
+        isGameActive = true;
+        currentPlayer = "X";
+        status.textContent = `Jogador ${currentPlayer} começa`;
+        cells.forEach(cell => {
+          cell.textContent = "";
+          cell.classList.remove('disabled');
+          cell.style.backgroundColor = '';
+        });
+      }
+
+      cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+      restartBtn.addEventListener('click', restartGame);
+
+      // Accessibility: play with keyboard (Enter or Space)
+      cells.forEach(cell => {
+        cell.addEventListener('keydown', (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            cell.click();
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
