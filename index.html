@@ -75,7 +75,7 @@
         </ul>
       </li>
       <li><a href="javascript.html">JavaScript</a></li>
-      <li><a href="brito-espetinhos.html">Cardápio com QR Code</a></li>
+      <!-- REMOVIDO o link duplicado <li><a href="brito-espetinhos.html">Cardápio com QR Code</a></li> -->
       <li><a href="react.html">Noções de React</a></li>
       <li><a href="logica.html">Lógica com C e Python (CS50)</a></li>
       <li><a href="ui-ux.html">UI/UX com Figma</a></li>
@@ -175,7 +175,12 @@
       const submenuLis = lis[0].querySelectorAll('ul.submenu li');
       submenuLis[0].querySelector('a').textContent = translations[lang].projetoHtmlCss;
       submenuLis[1].querySelector('a').textContent = translations[lang].cardapioEspetinhos;
-      submenuLis[1].querySelector('span a').textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
+
+      // Atualiza o texto do toggle (link ao lado)
+      const toggleLink = document.getElementById('toggleCardapioInfo');
+      if (toggleLink) {
+        toggleLink.textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
+      }
 
       const techBox = document.getElementById('cardapioInfo');
       const techLis = techBox.querySelectorAll('ul li');
@@ -187,11 +192,10 @@
       techLis[5].textContent = translations[lang].techList6;
 
       lis[1].querySelector('a').textContent = translations[lang].javascript;
-      lis[2].querySelector('a').textContent = translations[lang].cardapioEspetinhos;  // Corrigido aqui!
-      lis[3].querySelector('a').textContent = translations[lang].nocoesReact;
-      lis[4].querySelector('a').textContent = translations[lang].logica;
-      lis[5].querySelector('a').textContent = translations[lang].uiUx;
-      lis[6].querySelector('a').textContent = translations[lang].hardwareRedes;
+      lis[2].querySelector('a').textContent = translations[lang].nocoesReact;
+      lis[3].querySelector('a').textContent = translations[lang].logica;
+      lis[4].querySelector('a').textContent = translations[lang].uiUx;
+      lis[5].querySelector('a').textContent = translations[lang].hardwareRedes;
 
       document.querySelector('section:nth-of-type(2) h2').textContent = translations[lang].formacaoTitle;
       document.querySelector('section:nth-of-type(2) p').textContent = translations[lang].formacaoDesc;
