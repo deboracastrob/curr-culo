@@ -100,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const submenuLis = lis[0].querySelectorAll('ul.submenu li');
     submenuLis[0].querySelector('a').textContent = t.projetoHtmlCss;
-    submenuLis[1].querySelector('a').textContent = t.cardapioEspetinhos;
+
+    // Aqui corrigido: usando id para evitar sobrescrever múltiplos links
+    document.getElementById('cardapioLink').textContent = t.cardapioEspetinhos;
+
     submenuLis[1].querySelector('span a').textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
 
     const techBox = document.getElementById('cardapioInfo');
