@@ -16,6 +16,13 @@
     .submenu li {
       margin-bottom: 6px;
     }
+    /* Para o texto HTML5 & CSS3 ficar com estilo de lista mas não link */
+    .no-link {
+      color: #000;
+      font-weight: bold;
+      cursor: default;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -30,9 +37,9 @@
     <p>Acesse meus projetos e exemplos práticos em cada área:</p>
     <ul>
       <li>
-        <a href="html-css.html">HTML5 & CSS3</a>
+        <span class="no-link">HTML5 &amp; CSS3</span>
         <ul class="submenu">
-          <li><a href="html-css.html">Projeto geral de HTML5 & CSS3</a></li>
+          <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li><a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer">Cardápio Brito Espetinhos (QR Code)</a></li>
           <!-- Você pode adicionar mais links de projetos aqui -->
         </ul>
