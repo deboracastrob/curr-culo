@@ -4,36 +4,279 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio Hardware e Redes - Débora Brito</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafb;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+      line-height: 1.5;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2b7de9;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .section {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(43,125,233,0.15);
+      margin-bottom: 25px;
+    }
+    .section h2 {
+      color: #2b7de9;
+      border-bottom: 3px solid #2b7de9;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .components-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .component {
+      background: #e3eaff;
+      border: 2px solid #2b7de9;
+      border-radius: 10px;
+      width: 120px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .component.selected {
+      background-color: #2b7de9;
+      color: white;
+      font-weight: 700;
+    }
+    .assembly-area {
+      border: 2px dashed #2b7de9;
+      border-radius: 12px;
+      min-height: 180px;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .assembly-area .component {
+      cursor: default;
+      background: #2b7de9;
+      color: white;
+      border: none;
+      margin: 6px;
+      display: inline-block;
+      width: auto;
+      padding: 8px 12px;
+      font-weight: 700;
+    }
+    button#diagnoseBtn {
+      background-color: #2b7de9;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button#diagnoseBtn:hover {
+      background-color: #155abf;
+    }
+    #diagnosisResult {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      min-height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #diagnosisResult.success {
+      background-color: #2abf2a;
+      border: 2px solid #1a7a1a;
+    }
+    #diagnosisResult.failure {
+      background-color: #f44336;
+      border: 2px solid #a32929;
+    }
+    #techSection ul {
+      list-style-type: square;
+      padding-left: 20px;
+      color: #444;
+    }
+    #techSection ul li {
+      margin-bottom: 10px;
+    }
+    #techSection ul li strong {
+      color: #2b7de9;
+    }
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    footer a {
+      color: #2b7de9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #155abf;
+    }
+    @media (max-width: 480px) {
+      .components-list {
+        justify-content: center;
+      }
+      .component {
+        width: 100px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Portfólio Hardware e Redes</h1>
-    <p>Projetos e conhecimentos práticos em hardware e redes</p>
+    <h1>Hardware e Redes - Simulador Interativo</h1>
+    <p>Monte seu PC virtualmente e faça um diagnóstico básico de rede</p>
   </header>
 
   <section class="section">
-    <h2>Projeto: Diagnóstico de rede</h2>
-    <p>Script simples para verificar conectividade em rede (ping).</p>
-    <pre><code>
-ping 192.168.0.1
-ping google.com
-    </code></pre>
+    <h2>Componentes disponíveis</h2>
+    <div class="components-list" role="list" aria-label="Lista de componentes de hardware e rede">
+      <div class="component" role="listitem" tabindex="0" data-name="Processador (CPU)">Processador (CPU)</div>
+      <div class="component" role="listitem" tabindex="0" data-name="Memória RAM">Memória RAM</div>
+      <div class="component" role="listitem" tabindex="0" data-name="Placa-mãe">Placa-mãe</div>
+      <div class="component" role="listitem" tabindex="0" data-name="SSD">SSD</div>
+      <div class="component" role="listitem" tabindex="0" data-name="Cabo de Rede">Cabo de Rede</div>
+      <div class="component" role="listitem" tabindex="0" data-name="Roteador">Roteador</div>
+    </div>
+
+    <h2>Área de montagem</h2>
+    <div class="assembly-area" aria-live="polite" aria-label="Área onde os componentes selecionados aparecem">
+      Clique nos componentes para montar seu PC
+    </div>
+
+    <button id="diagnoseBtn" disabled>Fazer Diagnóstico de Rede</button>
+
+    <div id="diagnosisResult" role="alert" aria-live="assertive" style="display:none;"></div>
   </section>
 
-  <section class="section">
-    <h2>Projeto: Montagem básica de PC</h2>
-    <p>Descrição dos passos para montar um computador do zero.</p>
-    <ol>
-      <li>Escolher a placa-mãe compatível</li>
-      <li>Instalar processador e memória RAM</li>
-      <li>Conectar armazenamento e fontes</li>
-      <li>Ligar e testar o sistema</li>
-    </ol>
+  <section class="section" id="techSection">
+    <h2>Tecnologias usadas</h2>
+    <ul>
+      <li><strong>HTML5:</strong> Estrutura semântica e acessível da página.</li>
+      <li><strong>CSS3:</strong> Estilos modernos, layout flexível e responsivo.</li>
+      <li><strong>JavaScript:</strong> Interatividade para seleção de componentes e diagnóstico.</li>
+      <li><strong>Conceitos de Hardware:</strong> Demonstração dos componentes essenciais de um PC.</li>
+      <li><strong>Redes:</strong> Simulação de diagnóstico de conectividade e equipamentos básicos.</li>
+    </ul>
   </section>
 
   <footer>
     <p><a href="index.html">Voltar ao site principal</a></p>
   </footer>
+
+  <script>
+    const components = document.querySelectorAll('.component');
+    const assemblyArea = document.querySelector('.assembly-area');
+    const diagnoseBtn = document.getElementById('diagnoseBtn');
+    const diagnosisResult = document.getElementById('diagnosisResult');
+
+    const selectedComponents = new Set();
+
+    function updateAssembly() {
+      if (selectedComponents.size === 0) {
+        assemblyArea.textContent = 'Clique nos componentes para montar seu PC';
+        diagnoseBtn.disabled = true;
+        diagnosisResult.style.display = 'none';
+        diagnosisResult.textContent = '';
+        diagnosisResult.className = '';
+        return;
+      }
+
+      assemblyArea.innerHTML = '';
+      selectedComponents.forEach(name => {
+        const compDiv = document.createElement('div');
+        compDiv.classList.add('component');
+        compDiv.textContent = name;
+        assemblyArea.appendChild(compDiv);
+      });
+      diagnoseBtn.disabled = false;
+      diagnosisResult.style.display = 'none';
+      diagnosisResult.textContent = '';
+      diagnosisResult.className = '';
+    }
+
+    components.forEach(component => {
+      component.addEventListener('click', () => {
+        const name = component.getAttribute('data-name');
+        if (selectedComponents.has(name)) {
+          selectedComponents.delete(name);
+          component.classList.remove('selected');
+        } else {
+          selectedComponents.add(name);
+          component.classList.add('selected');
+        }
+        updateAssembly();
+      });
+      component.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          component.click();
+        }
+      });
+    });
+
+    diagnoseBtn.addEventListener('click', () => {
+      // Diagnóstico simples: precisa ter Placa-mãe, CPU, RAM e SSD para funcionar PC
+      // e Cabo de Rede + Roteador para rede OK
+
+      const hasPCCore = ['Placa-mãe', 'Processador (CPU)', 'Memória RAM', 'SSD']
+        .every(c => selectedComponents.has(c));
+      const hasNetwork = ['Cabo de Rede', 'Roteador']
+        .every(c => selectedComponents.has(c));
+
+      diagnosisResult.style.display = 'flex';
+
+      if (hasPCCore && hasNetwork) {
+        diagnosisResult.textContent = '✅ PC montado corretamente e rede conectada!';
+        diagnosisResult.className = 'success';
+      } else if (!hasPCCore && !hasNetwork) {
+        diagnosisResult.textContent = '❌ Faltam componentes principais do PC e da rede.';
+        diagnosisResult.className = 'failure';
+      } else if (!hasPCCore) {
+        diagnosisResult.textContent = '⚠️ PC incompleto. Adicione Placa-mãe, CPU, RAM e SSD.';
+        diagnosisResult.className = 'failure';
+      } else {
+        diagnosisResult.textContent = '⚠️ Rede incompleta. Adicione Cabo de Rede e Roteador.';
+        diagnosisResult.className = 'failure';
+      }
+    });
+
+  </script>
 </body>
 </html>
