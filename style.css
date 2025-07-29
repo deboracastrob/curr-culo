@@ -82,6 +82,28 @@ footer {
   color: #2b7de9;
   text-decoration: underline;
   user-select: none;
+  position: relative;
+  padding-right: 18px; /* espaço para o ícone */
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Ícone de seta simples no link */
+#toggleCardapioInfo::after {
+  content: "▶"; /* seta para a direita */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  color: #2b7de9;
+}
+
+/* Quando o quadro está aberto, seta aponta para baixo */
+#toggleCardapioInfo[aria-expanded="true"]::after {
+  transform: translateY(-50%) rotate(90deg);
+  color: #1a5ec8;
 }
 
 #toggleCardapioInfo:hover {
@@ -104,6 +126,16 @@ footer {
   font-size: 14px;
   color: #333;
   z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Quando visível */
+#cardapioInfo.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #cardapioInfo strong {
