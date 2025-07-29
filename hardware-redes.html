@@ -3,432 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hardware e Redes - Débora Brito</title>
+  <title>Diagnóstico de Hardware e Redes - Débora Brito</title>
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9fafc;
-      color: #222;
+      font-family: Arial, sans-serif;
+      background-color: #f6f9fc;
+      color: #333;
+      margin: 0;
+      padding: 20px;
       max-width: 900px;
-      margin: 20px auto;
-      padding: 0 20px 40px;
-      line-height: 1.5;
+      margin: auto;
     }
-    h1, h2 {
-      color: #1e88e5;
-      margin-bottom: 12px;
-    }
+
     header {
       text-align: center;
-      margin-bottom: 40px;
-    }
-    section {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(30, 136, 229, 0.15);
-      padding: 20px 25px;
       margin-bottom: 30px;
     }
 
-    /* Diagrama */
-    #networkDiagram {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto 30px;
-      cursor: pointer;
-    }
-    .device {
-      fill: #1e88e5;
-      stroke: #0d47a1;
-      stroke-width: 2;
-      transition: fill 0.3s;
-    }
-    .device:hover {
-      fill: #1565c0;
-    }
-    .device-label {
-      font-size: 14px;
-      fill: #222;
-      user-select: none;
-    }
-    #deviceInfo {
-      margin-top: 15px;
-      background: #e3f2fd;
-      padding: 12px 16px;
-      border-radius: 8px;
-      min-height: 60px;
-      font-weight: 600;
-      color: #0d47a1;
+    header h1 {
+      color: #2b7de9;
     }
 
-    /* Glossário */
-    #glossary {
-      max-height: 220px;
-      overflow-y: auto;
-      border: 1px solid #90caf9;
-      border-radius: 8px;
-      padding: 10px 15px;
-      background: #f1f8ff;
-    }
-    #glossary dt {
-      font-weight: 700;
-      margin-top: 12px;
-      color: #1565c0;
-      cursor: pointer;
-    }
-    #glossary dd {
-      margin-left: 15px;
-      margin-bottom: 8px;
-      color: #333;
+    .section {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
     }
 
-    /* Simulador IP */
-    #ipSimulator form {
+    .symptom-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-    #ipSimulator label {
-      flex-basis: 100%;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    #ipSimulator input {
-      flex-grow: 1;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 2px solid #1e88e5;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    #ipSimulator input:focus {
-      border-color: #0d47a1;
-      outline: none;
-    }
-    #ipSimulator button {
-      padding: 10px 20px;
-      background-color: #1e88e5;
+
+    .symptom-btn {
+      padding: 12px 18px;
+      background-color: #2b7de9;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      flex-basis: 100%;
-      max-width: 180px;
-    }
-    #ipSimulator button:hover {
-      background-color: #0d47a1;
-    }
-    #ipSimulator #result {
-      margin-top: 15px;
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    #ipSimulator #result.valid {
-      background-color: #c8e6c9;
-      color: #256029;
-    }
-    #ipSimulator #result.invalid {
-      background-color: #ffcdd2;
-      color: #b71c1c;
+      transition: background-color 0.2s ease;
     }
 
-    /* Hardware Table */
-    #hardwareTable {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
+    .symptom-btn:hover {
+      background-color: #155abf;
     }
-    #hardwareTable th, #hardwareTable td {
-      border: 1px solid #90caf9;
-      padding: 10px 12px;
-      text-align: left;
-      vertical-align: middle;
-    }
-    #hardwareTable th {
-      background-color: #e3f2fd;
-      color: #1565c0;
-      font-weight: 700;
-    }
-    #hardwareTable img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
+
+    #diagnosis {
+      padding: 15px;
+      background: #e8f0fe;
+      border-left: 4px solid #2b7de9;
       border-radius: 6px;
+      display: none;
     }
 
-    /* Quiz */
-    #quiz {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    #quiz h3 {
-      margin-bottom: 12px;
-      color: #1565c0;
-    }
-    .question {
-      margin-bottom: 18px;
-    }
-    .answers button {
-      display: block;
-      width: 100%;
-      padding: 10px 15px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      border: 2px solid #1e88e5;
-      background-color: white;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s, border-color 0.3s;
-      text-align: left;
-    }
-    .answers button:hover {
-      background-color: #e3f2fd;
-    }
-    .answers button.correct {
-      background-color: #c8e6c9;
-      border-color: #256029;
-      cursor: default;
-    }
-    .answers button.incorrect {
-      background-color: #ffcdd2;
-      border-color: #b71c1c;
-      cursor: default;
-    }
-    .feedback {
-      font-weight: 600;
-      margin-top: 6px;
-      color: #256029;
-    }
-    .feedback.incorrect {
-      color: #b71c1c;
+    footer {
+      text-align: center;
+      margin-top: 40px;
     }
 
-    /* Tecnologias usadas */
-    #techUsed {
-      background: #e3f2fd;
-      border-radius: 10px;
-      padding: 20px 25px;
-      font-size: 1rem;
-      color: #1565c0;
-      line-height: 1.4;
-    }
-    #techUsed h2 {
-      margin-bottom: 12px;
-    }
-    #techUsed ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-    #techUsed ul li strong {
-      color: #0d47a1;
+    footer a {
+      text-decoration: none;
+      color: #2b7de9;
+      font-weight: bold;
     }
 
-    /* Responsivo */
+    .tech-list ul {
+      padding-left: 20px;
+    }
+
+    .tech-list li {
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 600px) {
-      #ipSimulator form {
+      .symptom-list {
         flex-direction: column;
-      }
-      #ipSimulator button {
-        max-width: 100%;
-      }
-      #hardwareTable img {
-        width: 40px;
-        height: 40px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Hardware e Redes</h1>
-    <p>Demonstrando conhecimento prático em hardware e redes locais</p>
+    <h1>Simulador de Diagnóstico - Hardware e Redes</h1>
+    <p>Clique em um sintoma para ver o diagnóstico e solução</p>
   </header>
 
-  <section id="networkSection" class="section">
-    <h2>Diagrama Interativo da Rede Local</h2>
-    <svg id="networkDiagram" viewBox="0 0 600 320" aria-label="Diagrama da rede local com dispositivos conectados" role="img" tabindex="0">
-      <!-- Roteador -->
-      <rect class="device" id="router" x="250" y="20" width="100" height="60" rx="12" ry="12" />
-      <text class="device-label" x="300" y="60" text-anchor="middle">Roteador</text>
-
-      <!-- Switch -->
-      <rect class="device" id="switch" x="250" y="120" width="100" height="50" rx="12" ry="12" />
-      <text class="device-label" x="300" y="150" text-anchor="middle">Switch</text>
-
-      <!-- PC 1 -->
-      <rect class="device" id="pc1" x="100" y="220" width="90" height="60" rx="12" ry="12" />
-      <text class="device-label" x="145" y="260" text-anchor="middle">PC 1</text>
-
-      <!-- PC 2 -->
-      <rect class="device" id="pc2" x="410" y="220" width="90" height="60" rx="12" ry="12" />
-      <text class="device-label" x="455" y="260" text-anchor="middle">PC 2</text>
-
-      <!-- Servidor -->
-      <rect class="device" id="server" x="500" y="60" width="90" height="70" rx="12" ry="12" />
-      <text class="device-label" x="545" y="100" text-anchor="middle">Servidor</text>
-
-      <!-- Linhas conectando -->
-      <line x1="300" y1="80" x2="300" y2="120" stroke="#0d47a1" stroke-width="2"/>
-      <line x1="300" y1="145" x2="145" y2="220" stroke="#0d47a1" stroke-width="2"/>
-      <line x1="300" y1="145" x2="455" y2="220" stroke="#0d47a1" stroke-width="2"/>
-      <line x1="545" y1="60" x2="350" y2="95" stroke="#0d47a1" stroke-width="2" />
-    </svg>
-    <div id="deviceInfo" aria-live="polite" role="region" aria-atomic="true">Clique em um dispositivo para ver detalhes.</div>
-  </section>
-
-  <section id="glossarySection" class="section">
-    <h2>Glossário Técnico</h2>
-    <dl id="glossary" tabindex="0" aria-label="Glossário de termos técnicos em hardware e redes">
-      <dt tabindex="0" aria-expanded="false">IP (Internet Protocol)</dt>
-      <dd>Endereço numérico que identifica um dispositivo na rede.</dd>
-
-      <dt tabindex="0" aria-expanded="false">MAC Address</dt>
-      <dd>Identificador único atribuído à interface de rede de um dispositivo.</dd>
-
-      <dt tabindex="0" aria-expanded="false">DNS (Domain Name System)</dt>
-      <dd>Serviço que traduz nomes de domínio em endereços IP.</dd>
-
-      <dt tabindex="0" aria-expanded="false">DHCP (Dynamic Host Configuration Protocol)</dt>
-      <dd>Protocolo que atribui endereços IP automaticamente aos dispositivos na rede.</dd>
-
-      <dt tabindex="0" aria-expanded="false">Máscara de Sub-rede</dt>
-      <dd>Define qual parte do endereço IP corresponde à rede e qual parte aos hosts.</dd>
-
-      <dt tabindex="0" aria-expanded="false">Gateway</dt>
-      <dd>Dispositivo que conecta a rede local a outras redes, como a internet.</dd>
-    </dl>
-  </section>
-
-  <section id="ipSimulator" class="section" aria-label="Simulador básico de configuração de IP">
-    <h2>Simulador de Configuração de IP</h2>
-    <form id="ipForm" aria-describedby="formInstructions">
-      <p id="formInstructions">Digite um endereço IP, máscara de sub-rede e gateway para validar a configuração.</p>
-      <label for="ipInput">Endereço IP:</label>
-      <input type="text" id="ipInput" placeholder="Ex: 192.168.1.10" aria-required="true" />
-      
-      <label for="maskInput">Máscara de Sub-rede:</label>
-      <input type="text" id="maskInput" placeholder="Ex: 255.255.255.0" aria-required="true" />
-      
-      <label for="gatewayInput">Gateway:</label>
-      <input type="text" id="gatewayInput" placeholder="Ex: 192.168.1.1" aria-required="true" />
-      
-      <button type="submit">Validar Configuração</button>
-    </form>
-    <div id="result" role="alert" aria-live="assertive"></div>
-  </section>
-
-  <section id="hardwareSection" class="section">
-    <h2>Componentes de Hardware</h2>
-    <table id="hardwareTable" aria-describedby="hardwareDesc">
-      <caption id="hardwareDesc">Tabela com principais componentes de hardware e suas funções.</caption>
-      <thead>
-        <tr>
-          <th>Imagem</th>
-          <th>Componente</th>
-          <th>Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Intel_CPU_Pentium_IV.svg" alt="CPU" /></td>
-          <td>CPU</td>
-          <td>Unidade Central de Processamento, o cérebro do computador.</td>
-        </tr>
-        <tr>
-          <td><img src="https://upload.wikimedia.org/wikipedia/commons/6/65/RAM_icon.svg" alt="Memória RAM" /></td>
-          <td>Memória RAM</td>
-          <td>Memória volátil usada para armazenar dados temporariamente durante o processamento.</td>
-        </tr>
-        <tr>
-          <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Motherboard_PC.svg" alt="Placa-mãe" /></td>
-          <td>Placa-mãe</td>
-          <td>Placa principal que conecta todos os componentes do computador.</td>
-        </tr>
-        <tr>
-          <td><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Hard_disk_drive_icon.svg" alt="Disco Rígido" /></td>
-          <td>Disco Rígido (HD)</td>
-          <td>Armazena dados permanentemente.</td>
-        </tr>
-        <tr>
-          <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Network_interface_controller_icon.svg" alt="Placa de rede" /></td>
-          <td>Placa de Rede</td>
-          <td>Permite comunicação do computador com a rede.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section id="quizSection" class="section" aria-label="Quiz rápido sobre hardware e redes">
-    <h2>Quiz Rápido</h2>
-    <div id="quiz">
-      <div class="question" data-correct="2">
-        <h3>1. O que significa DHCP?</h3>
-        <div class="answers">
-          <button>A) Dynamic Host Configuration Protocol</button>
-          <button>B) Domain Host Control Protocol</button>
-          <button>C) Dynamic Host Configuration Protocol</button>
-          <button>D) Data Host Control Program</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question" data-correct="0">
-        <h3>2. Qual componente é considerado o "cérebro" do computador?</h3>
-        <div class="answers">
-          <button>A) CPU</button>
-          <button>B) Memória RAM</button>
-          <button>C) Disco Rígido</button>
-          <button>D) Placa de Rede</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div class="question" data-correct="1">
-        <h3>3. O que faz a máscara de sub-rede?</h3>
-        <div class="answers">
-          <button>A) Identifica o endereço do gateway</button>
-          <button>B) Define parte do endereço IP que corresponde à rede e aos hosts</button>
-          <button>C) Controla a velocidade da rede</button>
-          <button>D) Traduz nomes de domínio em IP</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
+  <section class="section">
+    <h2>Escolha um sintoma:</h2>
+    <div class="symptom-list">
+      <button class="symptom-btn" onclick="showDiagnosis('internet')">Sem internet</button>
+      <button class="symptom-btn" onclick="showDiagnosis('ligar')">PC não liga</button>
+      <button class="symptom-btn" onclick="showDiagnosis('lento')">Computador lento</button>
+      <button class="symptom-btn" onclick="showDiagnosis('rede')">Rede lenta</button>
+      <button class="symptom-btn" onclick="showDiagnosis('usb')">USB não reconhece</button>
     </div>
+    <div id="diagnosis"></div>
   </section>
 
-  <section id="techUsed" class="section" aria-label="Tecnologias usadas no projeto">
-    <h2>Tecnologias Usadas</h2>
+  <section class="section tech-list">
+    <h2>Tecnologias utilizadas</h2>
     <ul>
-      <li><strong>HTML5:</strong> Estrutura da página e conteúdo semântico.</li>
-      <li><strong>CSS3:</strong> Estilização responsiva, visual moderno e acessível.</li>
-      <li><strong>SVG:</strong> Criação do diagrama interativo de rede.</li>
-      <li><strong>JavaScript:</strong> Interatividade, validação, quiz e manipulação dinâmica do conteúdo.</li>
-      <li><strong>ARIA:</strong> Acessibilidade para leitores de tela e navegação por teclado.</li>
+      <li><strong>HTML5:</strong> Estruturação semântica da página.</li>
+      <li><strong>CSS3:</strong> Estilização com layout responsivo.</li>
+      <li><strong>JavaScript:</strong> Controle de interações e lógica de diagnóstico.</li>
+      <li><strong>Conhecimento em Hardware e Redes:</strong> Aplicado nos diagnósticos e soluções práticas.</li>
     </ul>
   </section>
 
-<script>
-  // --- Interação Diagrama ---
-  const deviceInfo = document.getElementById('deviceInfo');
-  const devicesData = {
-    router: {
-      name: 'Roteador',
-      info: 'Dispositivo que gerencia o tráfego entre sua rede local e a internet, atribuindo IPs e conectando dispositivos.',
-    },
-    switch: {
-      name: 'Switch',
-      info: 'Dispositivo que conecta vários dispositivos dentro da rede local, facilitando a comunicação entre eles.',
-    },
-    pc1: {
-      name: 'PC 1',
-      info: 'Computador pessoal conectado à rede para acesso
+  <footer>
+    <p><a href="index.html">Voltar ao site principal</a></p>
+  </footer>
+
+  <script>
+    const diagnosisData = {
+      internet: `
+        <h3>Sem internet</h3>
+        <p><strong>Diagnóstico:</strong> Pode ser problema no roteador, cabo desconectado ou DNS mal configurado.</p>
+        <p><strong>Solução:</strong> Reinicie o roteador, verifique cabos, teste com outro dispositivo e tente usar DNS como 8.8.8.8.</p>
+      `,
+      ligar: `
+        <h3>PC não liga</h3>
+        <p><strong>Diagnóstico:</strong> Pode ser fonte queimada, cabo mal encaixado ou placa-mãe danificada.</p>
+        <p><strong>Solução:</strong> Verifique tomada, troque cabo de energia, ou teste a fonte com multímetro.</p>
+      `,
+      lento: `
+        <h3>Computador lento</h3>
+        <p><strong>Diagnóstico:</strong> Pode ser excesso de programas na inicialização, HD cheio ou vírus.</p>
+        <p><strong>Solução:</strong> Use o Gerenciador de Tarefas, desinstale apps desnecessários, e rode um antivírus.</p>
+      `,
+      rede: `
+        <h3>Rede lenta</h3>
+        <p><strong>Diagnóstico:</strong> Pode ser interferência, sinal fraco ou congestionamento.</p>
+        <p><strong>Solução:</strong> Use cabos quando possível, reposicione o roteador e teste horários com menos tráfego.</p>
+      `,
+      usb: `
+        <h3>USB não reconhece</h3>
+        <p><strong>Diagnóstico:</strong> Pode ser driver corrompido ou porta danificada.</p>
+        <p><strong>Solução:</strong> Teste em outra porta, reinstale o driver no Gerenciador de Dispositivos.</p>
+      `
+    };
+
+    function showDiagnosis(key) {
+      const box = document.getElementById('diagnosis');
+      box.innerHTML = diagnosisData[key];
+      box.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
