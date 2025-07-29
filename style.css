@@ -64,8 +64,46 @@ footer {
   }
 }
 
-  background-color: #1a5ec8;
+/* Tooltip para tecnologias do Cardápio */
+.submenu li {
+  position: relative; /* necessário para posicionar tooltip */
+  margin-bottom: 6px;
 }
 
-/* Responsividade pa*
+.tooltip-tech {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 110%;
+  width: 280px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  z-index: 9999;
+}
 
+.tooltip-tech strong {
+  color: #b22222;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tooltip-tech ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.tooltip-tech ul li {
+  margin-bottom: 6px;
+}
+
+/* Mostrar tooltip quando o mouse estiver sobre o li que contém o link */
+.submenu li:hover > .tooltip-tech {
+  display: block;
+}
