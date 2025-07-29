@@ -25,6 +25,13 @@
     #languageSwitcher button:hover {
       background-color: #1a5ec8;
     }
+    #cardapioInfo {
+      display: none;
+      margin-top: 8px;
+    }
+    #cardapioInfo.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -38,7 +45,6 @@
     <p>Desenvolvedora Front-End em transição</p>
   </header>
 
-  <!-- Portfólio de Conhecimentos com submenu -->
   <section class="section">
     <h2>Portfólio de Conhecimentos</h2>
     <p>Acesse meus projetos e exemplos práticos em cada área:</p>
@@ -48,15 +54,12 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <!-- Link para o projeto -->
             <a href="brito-espetinhos.html" target="_blank">Cardápio com QR Code</a>
             <span style="margin-left: 8px;">
               <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo" style="color: #2b7de9; text-decoration: underline;">
                 (clique aqui para ver as tecnologias usadas)
               </a>
             </span>
-
-            <!-- Quadro com as tecnologias -->
             <div id="cardapioInfo" role="region" aria-live="polite">
               <strong>Tecnologias usadas:</strong>
               <ul>
@@ -90,7 +93,6 @@
     Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.</p>
   </section>
 
-  <!-- Botão para baixar PDF -->
   <section class="section">
     <button id="btnDownload">Baixar currículo em PDF</button>
   </section>
@@ -209,22 +211,14 @@
           translatePage(btn.getAttribute('data-lang'));
         });
       });
-    });
 
-    document.addEventListener('DOMContentLoaded', () => {
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
       toggleLink.addEventListener('click', (e) => {
         e.preventDefault();
-        const isOpen = infoBox.classList.contains('show');
-        if (isOpen) {
-          infoBox.classList.remove('show');
-          toggleLink.setAttribute('aria-expanded', 'false');
-        } else {
-          infoBox.classList.add('show');
-          toggleLink.setAttribute('aria-expanded', 'true');
-        }
+        infoBox.classList.toggle('show');
+        toggleLink.setAttribute('aria-expanded', infoBox.classList.contains('show'));
       });
     });
   </script>
