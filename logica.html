@@ -4,18 +4,212 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio Lógica com C e Python - Débora Brito</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #2b7de9;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .section {
+      background: white;
+      padding: 20px 25px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(43, 125, 233, 0.15);
+    }
+
+    .section h2 {
+      color: #2b7de9;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #2b7de9;
+      padding-bottom: 6px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 2px solid #2b7de9;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    input[type="number"]:focus {
+      border-color: #155abf;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      background-color: #2b7de9;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 300px;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    button:hover {
+      background-color: #155abf;
+    }
+
+    #resultados {
+      background: #e1f0ff;
+      border: 1px solid #2b7de9;
+      border-radius: 8px;
+      padding: 20px;
+      color: #003a75;
+      font-weight: 600;
+      font-size: 1.1rem;
+      min-height: 100px;
+    }
+
+    pre {
+      background: #f0f3f7;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #1e1e1e;
+      margin-top: 15px;
+      white-space: pre-wrap;
+    }
+
+    .tecnologias {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(43, 125, 233, 0.15);
+      padding: 20px 25px;
+      margin-top: 30px;
+    }
+
+    .tecnologias h2 {
+      color: #2b7de9;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #2b7de9;
+      padding-bottom: 6px;
+    }
+
+    .tecnologias ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .tecnologias ul li {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .tecnologias ul li strong {
+      color: #2b7de9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    footer a {
+      color: #2b7de9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #155abf;
+    }
+
+    /* Responsivo */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 12px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .section h2,
+      .tecnologias h2 {
+        font-size: 1.5rem;
+      }
+      button {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <header>
     <h1>Portfólio Lógica com C e Python (CS50)</h1>
-    <p>Exemplos de código para demonstrar lógica de programação</p>
+    <p>Exemplo interativo: Testador de números (par, ímpar e fatorial)</p>
   </header>
 
   <section class="section">
-    <h2>Exemplo em C</h2>
+    <h2>Testador de Números</h2>
+    <form id="numeroForm">
+      <label for="numeroInput">Digite um número inteiro:</label>
+      <input type="number" id="numeroInput" required min="0" step="1" placeholder="Ex: 5" />
+      <button type="submit">Testar Número</button>
+    </form>
+    <div id="resultados"></div>
+  </section>
+
+  <section class="section">
+    <h2>Código Exemplo em C</h2>
     <pre><code>
 #include &lt;stdio.h&gt;
+
+int fatorial(int n) {
+  if(n <= 1) return 1;
+  else return n * fatorial(n - 1);
+}
 
 int main() {
   int num;
@@ -26,24 +220,75 @@ int main() {
   } else {
     printf("Número ímpar\n");
   }
+  printf("Fatorial: %d\n", fatorial(num));
   return 0;
 }
     </code></pre>
   </section>
 
   <section class="section">
-    <h2>Exemplo em Python</h2>
+    <h2>Código Exemplo em Python</h2>
     <pre><code>
+def fatorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * fatorial(n - 1)
+
 num = int(input("Digite um número: "))
 if num % 2 == 0:
     print("Número par")
 else:
     print("Número ímpar")
+print("Fatorial:", fatorial(num))
     </code></pre>
+  </section>
+
+  <section class="tecnologias">
+    <h2>Tecnologias usadas</h2>
+    <ul>
+      <li><strong>HTML5:</strong> Estrutura da página web e formulários para entrada de dados.</li>
+      <li><strong>CSS3:</strong> Estilização para tornar a página visualmente agradável e responsiva.</li>
+      <li><strong>JavaScript:</strong> Lógica para processar o número, verificar se é par ou ímpar, calcular o fatorial e atualizar a página dinamicamente.</li>
+      <li><strong>Conceitos de lógica de programação:</strong> Uso de condições, recursão, operadores matemáticos e interação com o usuário.</li>
+    </ul>
   </section>
 
   <footer>
     <p><a href="index.html">Voltar ao site principal</a></p>
   </footer>
+
+  <script>
+    // Função para calcular fatorial usando recursão
+    function fatorial(n) {
+      if (n <= 1) return 1;
+      return n * fatorial(n - 1);
+    }
+
+    document.getElementById('numeroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('numeroInput');
+      const num = Number(input.value);
+
+      if (isNaN(num) || num < 0 || !Number.isInteger(num)) {
+        alert('Por favor, digite um número inteiro positivo.');
+        input.focus();
+        return;
+      }
+
+      // Verifica se é par ou ímpar
+      const parOuImpar = (num % 2 === 0) ? 'par' : 'ímpar';
+
+      // Calcula o fatorial
+      const fat = fatorial(num);
+
+      // Mostra o resultado
+      const resultadoDiv = document.getElementById('resultados');
+      resultadoDiv.innerHTML = `
+        <p>O número <strong>${num}</strong> é <strong>${parOuImpar}</strong>.</p>
+        <p>O fatorial de <strong>${num}</strong> é <strong>${fat}</strong>.</p>
+      `;
+    });
+  </script>
 </body>
 </html>
