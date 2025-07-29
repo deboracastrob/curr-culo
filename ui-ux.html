@@ -3,41 +3,358 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio UI/UX com Figma - Débora Brito</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Portfólio UI/UX - Débora Brito</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      color: #2b7de9;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .section {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(43,125,233,0.15);
+      margin-bottom: 25px;
+    }
+    .section h2 {
+      color: #2b7de9;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #2b7de9;
+      padding-bottom: 8px;
+      font-size: 1.8rem;
+    }
+    .rating-item {
+      margin-bottom: 18px;
+    }
+    .rating-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      font-size: 1.1rem;
+    }
+    .stars {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .star {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    .star.hovered,
+    .star.selected {
+      color: #2b7de9;
+    }
+    button#submitBtn {
+      background-color: #2b7de9;
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+    button#submitBtn:hover:not(:disabled) {
+      background-color: #155abf;
+    }
+    button#submitBtn:disabled {
+      background-color: #8fb8ff;
+      cursor: not-allowed;
+    }
+    #resultBox {
+      margin-top: 30px;
+      background: #e7f0ff;
+      border: 2px solid #2b7de9;
+      border-radius: 12px;
+      padding: 20px 25px;
+      font-size: 1.1rem;
+      color: #003a75;
+      font-weight: 600;
+    }
+    #resultBox ul {
+      list-style-type: disc;
+      margin-top: 10px;
+      padding-left: 25px;
+      font-weight: 400;
+      color: #1e1e1e;
+    }
+    /* Tecnologias usadas */
+    #techSection ul {
+      list-style-type: square;
+      padding-left: 20px;
+      font-size: 1rem;
+      color: #444;
+    }
+    #techSection ul li {
+      margin-bottom: 10px;
+    }
+    #techSection ul li strong {
+      color: #2b7de9;
+    }
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    footer a {
+      color: #2b7de9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #155abf;
+    }
+    /* Responsivo */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 12px;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .section h2 {
+        font-size: 1.4rem;
+      }
+      .star {
+        font-size: 1.6rem;
+      }
+      button#submitBtn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>Portfólio UI/UX com Figma</h1>
-    <p>Projetos e conceitos de design de interfaces</p>
+    <h1>Mini Dashboard de Avaliação UI/UX</h1>
+    <p>Avalie os aspectos principais de uma interface e receba dicas rápidas para melhorar a experiência do usuário.</p>
   </header>
 
-  <section class="section">
-    <h2>Projeto: Protótipo de app</h2>
-    <p>Protótipo criado no Figma para um app de organização pessoal.</p>
-    <img src="figma-prototipo.png" alt="Protótipo Figma" style="max-width:100%;height:auto;" />
+  <section class="section" id="ratingSection">
+    <h2>Avalie os seguintes itens</h2>
+
+    <div class="rating-item" data-item="Cores">
+      <label class="rating-label">Cores</label>
+      <div class="stars" tabindex="0" role="radiogroup" aria-label="Avaliação de cores">
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="-1" aria-label="1 estrela">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1" aria-label="2 estrelas">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1" aria-label="3 estrelas">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1" aria-label="4 estrelas">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1" aria-label="5 estrelas">&#9733;</span>
+      </div>
+    </div>
+
+    <div class="rating-item" data-item="Tipografia">
+      <label class="rating-label">Tipografia</label>
+      <div class="stars" tabindex="0" role="radiogroup" aria-label="Avaliação de tipografia">
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="-1" aria-label="1 estrela">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1" aria-label="2 estrelas">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1" aria-label="3 estrelas">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1" aria-label="4 estrelas">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1" aria-label="5 estrelas">&#9733;</span>
+      </div>
+    </div>
+
+    <div class="rating-item" data-item="Navegação">
+      <label class="rating-label">Navegação</label>
+      <div class="stars" tabindex="0" role="radiogroup" aria-label="Avaliação de navegação">
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="-1" aria-label="1 estrela">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1" aria-label="2 estrelas">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1" aria-label="3 estrelas">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1" aria-label="4 estrelas">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1" aria-label="5 estrelas">&#9733;</span>
+      </div>
+    </div>
+
+    <div class="rating-item" data-item="Feedback Visual">
+      <label class="rating-label">Feedback Visual</label>
+      <div class="stars" tabindex="0" role="radiogroup" aria-label="Avaliação de feedback visual">
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="-1" aria-label="1 estrela">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1" aria-label="2 estrelas">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1" aria-label="3 estrelas">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1" aria-label="4 estrelas">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1" aria-label="5 estrelas">&#9733;</span>
+      </div>
+    </div>
+
+    <div class="rating-item" data-item="Clareza da Informação">
+      <label class="rating-label">Clareza da Informação</label>
+      <div class="stars" tabindex="0" role="radiogroup" aria-label="Avaliação de clareza da informação">
+        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="-1" aria-label="1 estrela">&#9733;</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1" aria-label="2 estrelas">&#9733;</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1" aria-label="3 estrelas">&#9733;</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1" aria-label="4 estrelas">&#9733;</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1" aria-label="5 estrelas">&#9733;</span>
+      </div>
+    </div>
+
+    <button id="submitBtn" disabled>Avaliar</button>
+
+    <div id="resultBox" aria-live="polite" role="region" style="display:none;"></div>
   </section>
 
-  <section class="section">
-    <h2>Projeto: Design de botões</h2>
-    <p>Botões estilizados com foco na experiência do usuário.</p>
-    <pre><code>
-button {
-  background-color: #2b7de9;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #1a5bb8;
-}
-    </code></pre>
+  <section class="section" id="techSection">
+    <h2>Tecnologias usadas</h2>
+    <ul>
+      <li><strong>HTML5:</strong> Estrutura semântica e acessível da página.</li>
+      <li><strong>CSS3:</strong> Estilos modernos, responsividade e feedback visual para o usuário.</li>
+      <li><strong>JavaScript:</strong> Lógica de interação para avaliação, controle do estado e exibição dos resultados.</li>
+      <li><strong>UI/UX:</strong> Aplicação prática dos conceitos de design visual e experiência do usuário para garantir uma interface intuitiva e interativa.</li>
+    </ul>
   </section>
 
   <footer>
     <p><a href="index.html">Voltar ao site principal</a></p>
   </footer>
+
+  <script>
+    // Lógica para interatividade das estrelas e avaliação
+
+    const ratingItems = document.querySelectorAll('.rating-item');
+
+    ratingItems.forEach(item => {
+      const stars = item.querySelectorAll('.star');
+      let selectedValue = 0;
+
+      stars.forEach(star => {
+        // Hover
+        star.addEventListener('mouseenter', () => {
+          highlightStars(stars, star.dataset.value);
+        });
+        star.addEventListener('mouseleave', () => {
+          highlightStars(stars, selectedValue);
+        });
+        // Click
+        star.addEventListener('click', () => {
+          selectedValue = star.dataset.value;
+          setSelectedStars(stars, selectedValue);
+          checkAllSelected();
+        });
+        // Keyboard accessibility
+        star.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            star.click();
+          }
+          if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const next = star.nextElementSibling || stars[0];
+            next.focus();
+          }
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const prev = star.previousElementSibling || stars[stars.length - 1];
+            prev.focus();
+          }
+        });
+      });
+
+      // Initial reset
+      highlightStars(stars, 0);
+    });
+
+    function highlightStars(stars, count) {
+      stars.forEach(star => {
+        star.classList.toggle('hovered', star.dataset.value <= count);
+      });
+    }
+
+    function setSelectedStars(stars, count) {
+      stars.forEach(star => {
+        star.classList.toggle('selected', star.dataset.value <= count);
+        star.setAttribute('aria-checked', star.dataset.value == count ? 'true' : 'false');
+      });
+    }
+
+    function checkAllSelected() {
+      let allSelected = true;
+      ratingItems.forEach(item => {
+        const stars = item.querySelectorAll('.star.selected');
+        if (stars.length === 0) allSelected = false;
+      });
+      document.getElementById('submitBtn').disabled = !allSelected;
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const results = {};
+      ratingItems.forEach(item => {
+        const itemName = item.getAttribute('data-item');
+        const selectedStar = item.querySelector('.star.selected:last-of-type');
+        results[itemName] = selectedStar ? Number(selectedStar.dataset.value) : 0;
+      });
+
+      displayResults(results);
+    });
+
+    function displayResults(results) {
+      const resultBox = document.getElementById('resultBox');
+      resultBox.style.display = 'block';
+
+      // Gerar dicas simples baseadas nas notas (abaixo de 3 é ruim)
+      const tips = {
+        "Cores": "Considere usar uma paleta harmônica e cores que facilitem a leitura.",
+        "Tipografia": "Escolha fontes legíveis e consistentes para melhorar a experiência de leitura.",
+        "Navegação": "Garanta menus claros e caminhos fáceis para o usuário encontrar o que precisa.",
+        "Feedback Visual": "Use animações e indicadores para mostrar ações e estados.",
+        "Clareza da Informação": "Organize as informações de forma lógica e objetiva."
+      };
+
+      let avg = 0;
+      let count = 0;
+      let tipList = '';
+
+      for (const [key, value] of Object.entries(results)) {
+        avg += value;
+        count++;
+        tipList += `<li><strong>${key}:</strong> Nota ${value}.`;
+        if (value < 3) tipList += ` Dica: ${tips[key]}`;
+        tipList += `</li>`;
+      }
+      avg = (avg / count).toFixed(2);
+
+      resultBox.innerHTML = `
+        <h3>Resultado da Avaliação</h3>
+        <p>Média geral: <strong>${avg}</strong> estrelas</p>
+        <ul>${tipList}</ul>
+      `;
+      // Scroll suave para resultado
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
 </body>
 </html>
