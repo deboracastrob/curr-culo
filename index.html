@@ -174,7 +174,6 @@
       const submenuLis = lis[0].querySelectorAll('ul.submenu li');
       submenuLis[0].querySelector('a').textContent = translations[lang].projetoHtmlCss;
       submenuLis[1].querySelector('a').textContent = translations[lang].cardapioEspetinhos;
-      // Também o texto do "(clique aqui para ver...)"
       submenuLis[1].querySelector('span a').textContent = lang === 'pt' ? "(clique aqui para ver as tecnologias usadas)" : "(click here to see used technologies)";
 
       // Quadro de tecnologias
@@ -205,7 +204,20 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Toggle tecnologias
+      // Inicializa a página em português
+      translatePage('pt');
+
+      // Botões de idioma
+      const buttons = document.querySelectorAll('#languageSwitcher button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          translatePage(btn.getAttribute('data-lang'));
+        });
+      });
+    });
+
+    // Mostrar/esconder o quadro de tecnologias do cardápio
+    document.addEventListener('DOMContentLoaded', () => {
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
@@ -220,17 +232,6 @@
           toggleLink.setAttribute('aria-expanded', 'true');
         }
       });
-
-      // Botões de idioma
-      const buttons = document.querySelectorAll('#languageSwitcher button');
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          translatePage(btn.getAttribute('data-lang'));
-        });
-      });
-
-      // Inicializa a página em português
-      translatePage('pt');
     });
 
     // Geração de PDF com jsPDF
@@ -239,6 +240,52 @@
       const btn = document.getElementById('btnDownload');
 
       btn.addEventListener('click', () => {
+        // Obtém o idioma atual pelo texto do botão de download
+        const lang = document.getElementById('btnDownload').textContent.includes('Baixar') ? 'pt' : 'en';
+
+        const translationsPDF = {
+          pt: {
+            headerTitle: "Débora Brito",
+            headerSubtitle: "Desenvolvedora Front-End em transição",
+            objetivoTitle: "Objetivo",
+            objetivoText: "Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.",
+            habilidadesTitle: "Habilidades Técnicas",
+            habilidadesList: [
+              "HTML5, CSS3, JavaScript",
+              "Git e GitHub",
+              "Noções de React",
+              "Lógica com C e Python (CS50)",
+              "UI/UX • Figma",
+              "Hardware e Redes"
+            ],
+            formacaoTitle: "Formação",
+            formacaoText: "Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)",
+            experienciaTitle: "Experiência",
+            experienciaText: "Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa."
+          },
+          en: {
+            headerTitle: "Débora Brito",
+            headerSubtitle: "Front-End Developer in transition",
+            objetivoTitle: "Objective",
+            objetivoText: "To work as a Junior Front-End Developer, applying my knowledge in HTML, CSS, JavaScript and programming logic to create functional and accessible interfaces.",
+            habilidadesTitle: "Technical Skills",
+            habilidadesList: [
+              "HTML5, CSS3, JavaScript",
+              "Git and GitHub",
+              "Basics of React",
+              "Logic with C and Python (CS50)",
+              "UI/UX • Figma",
+              "Hardware and Networks"
+            ],
+            formacaoTitle: "Education",
+            formacaoText: "Technologist in Systems Analysis and Development – Anhembi Morumbi (in progress)",
+            experienciaTitle: "Experience",
+            experienciaText: "Assistant systems analyst - Arklok (2022-2023):\nResponsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance."
+          }
+        };
+
+        const t = translationsPDF[lang] || translationsPDF.pt;
+
         const doc = new jsPDF();
         const pageHeight = doc.internal.pageSize.height;
         let y = 20;
@@ -255,7 +302,7 @@
         function addParagraph(text) {
           doc.setFont("helvetica", "normal");
           doc.setFontSize(12);
-          const lines = doc.splitTextToSize(text, maxWidth);
+          const lines = doc.splitTextToSize(text.replace(/\n/g, " "), maxWidth);
           lines.forEach(line => {
             if (y > pageHeight - 20) {
               doc.addPage();
@@ -265,6 +312,24 @@
             y += 7;
           });
           y += 5;
+        }
+
+        function addParagraphWithLineBreaks(text) {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(12);
+          const paragraphs = text.split('\n');
+          paragraphs.forEach(paragraph => {
+            const lines = doc.splitTextToSize(paragraph, maxWidth);
+            lines.forEach(line => {
+              if (y > pageHeight - 20) {
+                doc.addPage();
+                y = 20;
+              }
+              doc.text(line, leftMargin, y);
+              y += 7;
+            });
+            y += 5;
+          });
         }
 
         function addBulletList(items) {
@@ -281,36 +346,28 @@
           y += 5;
         }
 
-        // Conteúdo do PDF
         doc.setFontSize(22);
         doc.setFont("helvetica", "bold");
-        doc.text("Débora Brito", leftMargin, y);
+        doc.text(t.headerTitle, leftMargin, y);
         y += 12;
         doc.setFontSize(16);
         doc.setFont("helvetica", "normal");
-        doc.text("Desenvolvedora Front-End em transição", leftMargin, y);
+        doc.text(t.headerSubtitle, leftMargin, y);
         y += 15;
 
-        addTitle("Objetivo");
-        addParagraph("Atuar como Desenvolvedora Front-End Júnior, aplicando meus conhecimentos em HTML, CSS, JavaScript e lógica de programação para criar interfaces funcionais e acessíveis.");
+        addTitle(t.objetivoTitle);
+        addParagraph(t.objetivoText);
 
-        addTitle("Habilidades Técnicas");
-        addBulletList([
-          "HTML5, CSS3, JavaScript",
-          "Git e GitHub",
-          "Noções de React",
-          "Lógica com C e Python (CS50)",
-          "UI/UX • Figma",
-          "Hardware e Redes"
-        ]);
+        addTitle(t.habilidadesTitle);
+        addBulletList(t.habilidadesList);
 
-        addTitle("Formação");
-        addParagraph("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)");
+        addTitle(t.formacaoTitle);
+        addParagraph(t.formacaoText);
 
-        addTitle("Experiência");
-        addParagraph("Assistente analista de sistemas - Arklok (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.");
+        addTitle(t.experienciaTitle);
+        addParagraphWithLineBreaks(t.experienciaText);
 
-        doc.save('curriculo.pdf');
+        doc.save(lang === 'pt' ? 'curriculo.pdf' : 'resume.pdf');
       });
     };
   </script>
