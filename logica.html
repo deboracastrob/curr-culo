@@ -11,7 +11,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f5f7fa;
@@ -21,23 +20,19 @@
       max-width: 720px;
       margin: 0 auto;
     }
-
     header {
       text-align: center;
       margin-bottom: 30px;
     }
-
     header h1 {
       font-size: 2.5rem;
       color: #2b7de9;
       margin-bottom: 8px;
     }
-
     header p {
       font-size: 1.1rem;
       color: #555;
     }
-
     .section {
       background: white;
       padding: 20px 25px;
@@ -45,7 +40,6 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(43, 125, 233, 0.15);
     }
-
     .section h2 {
       color: #2b7de9;
       margin-bottom: 15px;
@@ -53,59 +47,6 @@
       border-bottom: 2px solid #2b7de9;
       padding-bottom: 6px;
     }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    input[type="number"] {
-      width: 100%;
-      padding: 10px 12px;
-      font-size: 1rem;
-      border: 2px solid #2b7de9;
-      border-radius: 6px;
-      transition: border-color 0.3s ease;
-      margin-bottom: 15px;
-    }
-
-    input[type="number"]:focus {
-      border-color: #155abf;
-      outline: none;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1.1rem;
-      background-color: #2b7de9;
-      border: none;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-      width: 100%;
-      max-width: 300px;
-      display: block;
-      margin: 0 auto 20px auto;
-    }
-
-    button:hover {
-      background-color: #155abf;
-    }
-
-    #resultados {
-      background: #e1f0ff;
-      border: 1px solid #2b7de9;
-      border-radius: 8px;
-      padding: 20px;
-      color: #003a75;
-      font-weight: 600;
-      font-size: 1.1rem;
-      min-height: 100px;
-    }
-
     pre {
       background: #f0f3f7;
       padding: 15px;
@@ -114,58 +55,101 @@
       font-family: 'Courier New', Courier, monospace;
       font-size: 0.9rem;
       color: #1e1e1e;
-      margin-top: 15px;
+      margin-bottom: 15px;
       white-space: pre-wrap;
     }
-
-    .tecnologias {
+    p {
+      margin-bottom: 15px;
+    }
+    form {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    input[type="number"] {
+      flex-grow: 1;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 2px solid #2b7de9;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+      min-width: 180px;
+    }
+    input[type="number"]:focus {
+      border-color: #155abf;
+      outline: none;
+    }
+    button {
+      padding: 10px 18px;
+      font-size: 1rem;
+      background-color: #2b7de9;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      min-width: 140px;
+    }
+    button:hover {
+      background-color: #155abf;
+    }
+    #resultParImpar, #resultFatorial {
+      background: #e1f0ff;
+      border: 1px solid #2b7de9;
+      border-radius: 8px;
+      padding: 15px 20px;
+      color: #003a75;
+      font-weight: 600;
+      min-height: 60px;
+      margin-top: 15px;
+      font-size: 1.1em;
+    }
+    .explanation {
+      background: #e7f0ff;
+      border-left: 6px solid #2b7de9;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      color: #004080;
+      border-radius: 5px;
+    }
+    .technologies {
       background: #fff;
+      border: 2px solid #2b7de9;
+      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(43, 125, 233, 0.15);
-      padding: 20px 25px;
+      box-shadow: 0 0 12px rgba(43,125,233,0.2);
       margin-top: 30px;
     }
-
-    .tecnologias h2 {
-      color: #2b7de9;
+    .technologies h2 {
       margin-bottom: 15px;
-      font-size: 1.8rem;
-      border-bottom: 2px solid #2b7de9;
-      padding-bottom: 6px;
     }
-
-    .tecnologias ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    .tecnologias ul li {
-      margin-bottom: 10px;
+    .technologies ul {
+      list-style: disc inside;
       font-size: 1rem;
+      color: #222;
     }
-
-    .tecnologias ul li strong {
-      color: #2b7de9;
+    .technologies ul li {
+      margin-bottom: 10px;
     }
-
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 30px;
       font-size: 0.9rem;
       color: #555;
     }
-
     footer a {
       color: #2b7de9;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s ease;
     }
-
     footer a:hover {
       color: #155abf;
     }
-
     /* Responsivo */
     @media (max-width: 480px) {
       body {
@@ -174,42 +158,28 @@
       header h1 {
         font-size: 2rem;
       }
-      .section h2,
-      .tecnologias h2 {
+      .section h2, .technologies h2 {
         font-size: 1.5rem;
       }
+      form {
+        flex-direction: column;
+      }
       button {
-        max-width: 100%;
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Portfólio Lógica com C e Python (CS50)</h1>
-    <p>Exemplo interativo: Testador de números (par, ímpar e fatorial)</p>
+    <p>Exemplos de código e mini projeto interativo com a mesma lógica em JS</p>
   </header>
 
   <section class="section">
-    <h2>Testador de Números</h2>
-    <form id="numeroForm">
-      <label for="numeroInput">Digite um número inteiro:</label>
-      <input type="number" id="numeroInput" required min="0" step="1" placeholder="Ex: 5" />
-      <button type="submit">Testar Número</button>
-    </form>
-    <div id="resultados"></div>
-  </section>
-
-  <section class="section">
-    <h2>Código Exemplo em C</h2>
+    <h2>Exemplo em C</h2>
     <pre><code>
 #include &lt;stdio.h&gt;
-
-int fatorial(int n) {
-  if(n <= 1) return 1;
-  else return n * fatorial(n - 1);
-}
 
 int main() {
   int num;
@@ -220,37 +190,43 @@ int main() {
   } else {
     printf("Número ímpar\n");
   }
-  printf("Fatorial: %d\n", fatorial(num));
   return 0;
 }
     </code></pre>
   </section>
 
   <section class="section">
-    <h2>Código Exemplo em Python</h2>
+    <h2>Exemplo em Python</h2>
     <pre><code>
-def fatorial(n):
-    if n <= 1:
-        return 1
-    else:
-        return n * fatorial(n - 1)
-
 num = int(input("Digite um número: "))
 if num % 2 == 0:
     print("Número par")
 else:
     print("Número ímpar")
-print("Fatorial:", fatorial(num))
     </code></pre>
   </section>
 
-  <section class="tecnologias">
+  <section class="section">
+    <h2>Projeto interativo: Verificar par/ímpar e calcular fatorial</h2>
+    <form id="logicForm">
+      <input type="number" id="numberInput" placeholder="Digite um número inteiro" required />
+      <button type="submit">Verificar</button>
+    </form>
+    <div id="resultParImpar"></div>
+    <div id="resultFatorial"></div>
+  </section>
+
+  <section class="explanation">
+    <p><strong>Explicação:</strong> A lógica para verificar se um número é par ou ímpar e para calcular o fatorial é a mesma em C, Python e JavaScript. Nesta página, mostramos os códigos em C e Python e disponibilizamos um mini projeto interativo em JavaScript que aplica a mesma lógica, para você testar diretamente aqui no navegador sem precisar instalar nada. Isso ajuda a entender que a lógica de programação é universal, independentemente da linguagem usada.</p>
+  </section>
+
+  <section class="technologies">
     <h2>Tecnologias usadas</h2>
     <ul>
-      <li><strong>HTML5:</strong> Estrutura da página web e formulários para entrada de dados.</li>
-      <li><strong>CSS3:</strong> Estilização para tornar a página visualmente agradável e responsiva.</li>
-      <li><strong>JavaScript:</strong> Lógica para processar o número, verificar se é par ou ímpar, calcular o fatorial e atualizar a página dinamicamente.</li>
-      <li><strong>Conceitos de lógica de programação:</strong> Uso de condições, recursão, operadores matemáticos e interação com o usuário.</li>
+      <li><strong>C:</strong> Linguagem compilada, usada para programas que exigem alta performance e controle de baixo nível.</li>
+      <li><strong>Python:</strong> Linguagem interpretada, muito usada para ensino de lógica e desenvolvimento rápido.</li>
+      <li><strong>JavaScript:</strong> Linguagem de programação que roda no navegador para criar interatividade.</li>
+      <li><strong>HTML5 e CSS3:</strong> Linguagens para estruturar e estilizar a página web.</li>
     </ul>
   </section>
 
@@ -259,35 +235,39 @@ print("Fatorial:", fatorial(num))
   </footer>
 
   <script>
-    // Função para calcular fatorial usando recursão
-    function fatorial(n) {
-      if (n <= 1) return 1;
-      return n * fatorial(n - 1);
+    function calculaFatorial(n) {
+      if (n < 0) return null; // fatorial não definido para negativos
+      if (n === 0 || n === 1) return 1;
+      let fat = 1;
+      for (let i = 2; i <= n; i++) {
+        fat *= i;
+      }
+      return fat;
     }
 
-    document.getElementById('numeroForm').addEventListener('submit', function(e) {
+    document.getElementById('logicForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const input = document.getElementById('numeroInput');
-      const num = Number(input.value);
+      const num = parseInt(document.getElementById('numberInput').value, 10);
+      const resultParImpar = document.getElementById('resultParImpar');
+      const resultFatorial = document.getElementById('resultFatorial');
 
-      if (isNaN(num) || num < 0 || !Number.isInteger(num)) {
-        alert('Por favor, digite um número inteiro positivo.');
-        input.focus();
+      if (isNaN(num)) {
+        resultParImpar.textContent = "Por favor, digite um número válido.";
+        resultFatorial.textContent = "";
         return;
       }
 
-      // Verifica se é par ou ímpar
-      const parOuImpar = (num % 2 === 0) ? 'par' : 'ímpar';
+      // Verificar par ou ímpar
+      const parOuImpar = (num % 2 === 0) ? "par" : "ímpar";
+      resultParImpar.textContent = `O número ${num} é ${parOuImpar}.`;
 
-      // Calcula o fatorial
-      const fat = fatorial(num);
-
-      // Mostra o resultado
-      const resultadoDiv = document.getElementById('resultados');
-      resultadoDiv.innerHTML = `
-        <p>O número <strong>${num}</strong> é <strong>${parOuImpar}</strong>.</p>
-        <p>O fatorial de <strong>${num}</strong> é <strong>${fat}</strong>.</p>
-      `;
+      // Calcular fatorial
+      const fat = calculaFatorial(num);
+      if (fat === null) {
+        resultFatorial.textContent = "Fatorial não definido para números negativos.";
+      } else {
+        resultFatorial.textContent = `Fatorial de ${num} é ${fat}.`;
+      }
     });
   </script>
 </body>
