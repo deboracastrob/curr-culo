@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Débora Brito | Desenvolvedora Front-End</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -15,7 +15,7 @@
     }
     .submenu li {
       margin-bottom: 6px;
-      position: relative; /* necessário para tooltip */
+      position: relative; /* necessário para posicionar o tooltip */
     }
     /* Para o texto HTML5 & CSS3 ficar com estilo de lista mas não link */
     .no-link {
@@ -24,8 +24,7 @@
       cursor: default;
       text-decoration: none;
     }
-
-    /* Tooltip estilo */
+    /* Tooltip que aparece ao passar o mouse */
     .tooltip-tech {
       display: none;
       position: absolute;
@@ -55,9 +54,8 @@
     .tooltip-tech ul li {
       margin-bottom: 6px;
     }
-
-    /* Mostrar tooltip ao passar o mouse no link ou no próprio tooltip */
-    li:hover .tooltip-tech {
+    /* Mostrar tooltip quando o mouse estiver sobre o li que contém o link */
+    .submenu li:hover > .tooltip-tech {
       display: block;
     }
   </style>
@@ -78,7 +76,7 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer" id="link-cardapio">
+            <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer">
               Cardápio Brito Espetinhos (QR Code)
             </a>
             <div class="tooltip-tech">
@@ -108,7 +106,7 @@
 
   <section class="section">
     <h2>Experiência</h2>
-    <p><strong>Assistente analista de sistemas - Arklok</strong> (2022-2023)<br/>
+    <p><strong>Assistente analista de sistemas - Arklok</strong> (2022-2023)<br />
     Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.</p>
   </section>
 
