@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio React - Débora Brito</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    #weatherResult {
+      margin-top: 15px;
+      font-size: 1.1em;
+    }
+    #weatherResult img {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+    }
+    #weatherForm input, #weatherForm button {
+      padding: 8px;
+      font-size: 1em;
+      margin-right: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #weatherForm button {
+      cursor: pointer;
+      background-color: #2b7de9;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    #weatherForm button:hover {
+      background-color: #1a5ec8;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -46,25 +74,32 @@ function Contador() {
     <script>
       document.getElementById('weatherForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        const city = document.getElementById('cityInput').value;
+        const city = document.getElementById('cityInput').value.trim();
         const apiKey = '9bf26c14528e5cad9e77583ee3253c37';
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&lang=pt_br&units=metric`;
+        const resultDiv = document.getElementById('weatherResult');
+        
+        if (!city) {
+          resultDiv.innerHTML = '<p style="color:red;">Por favor, digite uma cidade válida.</p>';
+          return;
+        }
+
+        resultDiv.innerHTML = '<p>Carregando...</p>';
 
         try {
           const res = await fetch(url);
           const data = await res.json();
           if (data.cod !== 200) {
-            document.getElementById('weatherResult').innerHTML = `<p style="color:red;">Cidade não encontrada.</p>`;
+            resultDiv.innerHTML = `<p style="color:red;">Cidade não encontrada.</p>`;
             return;
           }
-          const html = `
+          const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+          resultDiv.innerHTML = `
             <h3>Clima em ${data.name}</h3>
-            <p><strong>Temperatura:</strong> ${data.main.temp}°C</p>
-            <p><strong>Condição:</strong> ${data.weather[0].description}</p>
+            <p><img src="${iconUrl}" alt="Ícone do clima" /> <strong>${data.main.temp.toFixed(1)}°C</strong> - ${data.weather[0].description}</p>
           `;
-          document.getElementById('weatherResult').innerHTML = html;
         } catch (error) {
-          document.getElementById('weatherResult').innerHTML = `<p style="color:red;">Erro ao buscar clima.</p>`;
+          resultDiv.innerHTML = `<p style="color:red;">Erro ao buscar clima.</p>`;
         }
       });
     </script>
