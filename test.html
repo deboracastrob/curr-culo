@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Teste Tooltip</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f6fc;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+  }
+  h2 {
+    color: #2b7de9;
+  }
+  ul.submenu {
+    list-style-type: circle;
+    padding-left: 20px;
+  }
+  ul.submenu li {
+    position: relative; /* posição base para tooltip */
+    margin-bottom: 12px;
+  }
+  ul.submenu li a {
+    color: #2b7de9;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  /* Tooltip */
+  .tooltip-tech {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 110%;
+    width: 280px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 14px;
+    color: #333;
+    z-index: 9999;
+  }
+  .tooltip-tech strong {
+    color: #b22222;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .tooltip-tech ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .tooltip-tech ul li {
+    margin-bottom: 6px;
+  }
+  /* Mostrar tooltip no hover do li */
+  ul.submenu li:hover > .tooltip-tech {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<h2>Portfólio de Conhecimentos</h2>
+<ul class="submenu">
+  <li>
+    <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer">Cardápio Brito Espetinhos (QR Code)</a>
+    <div class="tooltip-tech">
+      <strong>Tecnologias usadas:</strong>
+      <ul>
+        <li>HTML5 e CSS3 para estrutura e estilo responsivo</li>
+        <li>JavaScript para gerar dinamicamente o menu</li>
+        <li>QRCode.js para exibir o QR Code de acesso</li>
+        <li>Imagens otimizadas para melhor visualização</li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+</body>
+</html>
