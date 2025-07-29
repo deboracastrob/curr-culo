@@ -15,6 +15,7 @@
     }
     .submenu li {
       margin-bottom: 6px;
+      position: relative; /* importante para posicionar tooltip */
     }
     /* Para o texto HTML5 & CSS3 ficar com estilo de lista mas não link */
     .no-link {
@@ -23,36 +24,36 @@
       cursor: default;
       text-decoration: none;
     }
-    /* Estilo para o quadro das tecnologias do cardápio */
-    .tech-cardapio {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
+
+    /* Estilo do tooltip */
+    .tooltip-tech {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 110%;
+      width: 280px;
       background: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 15px;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      z-index: 100;
     }
-    .tech-cardapio h2 {
+    .tooltip-tech strong {
       color: #b22222;
-      margin-bottom: 10px;
-    }
-    .tech-cardapio ul {
-      margin-left: 20px;
-      margin-bottom: 15px;
-    }
-    .tech-cardapio a.button-link {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #b22222;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      display: block;
+      margin-bottom: 8px;
     }
-    .tech-cardapio a.button-link:hover {
-      background-color: #7a0f0f;
+    .tooltip-tech ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .tooltip-tech ul li {
+      margin-bottom: 6px;
     }
   </style>
 </head>
@@ -71,7 +72,20 @@
         <span class="no-link">HTML5 &amp; CSS3</span>
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
-          <li><a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer">Cardápio Brito Espetinhos (QR Code)</a></li>
+          <li style="position: relative;">
+            <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer" id="link-cardapio">
+              Cardápio Brito Espetinhos (QR Code)
+            </a>
+            <div class="tooltip-tech" id="tooltip-tech-cardapio">
+              <strong>Tecnologias usadas:</strong>
+              <ul>
+                <li>HTML5 e CSS3 para estrutura e estilo responsivo</li>
+                <li>JavaScript para gerar dinamicamente o menu</li>
+                <li>QRCode.js para exibir o QR Code de acesso</li>
+                <li>Imagens otimizadas para melhor visualização</li>
+              </ul>
+            </div>
+          </li>
           <!-- Você pode adicionar mais links de projetos aqui -->
         </ul>
       </li>
@@ -81,19 +95,6 @@
       <li><a href="ui-ux.html">UI/UX com Figma</a></li>
       <li><a href="hardware-redes.html">Hardware e Redes</a></li>
     </ul>
-  </section>
-
-  <!-- NOVA SEÇÃO: Tecnologias usadas no Cardápio Brito Espetinhos -->
-  <section class="tech-cardapio">
-    <h2>Tecnologias usadas no Cardápio Brito Espetinhos</h2>
-    <p>Este projeto utiliza as seguintes tecnologias:</p>
-    <ul>
-      <li>HTML5 e CSS3 para estrutura e estilo responsivo</li>
-      <li>JavaScript para gerar dinamicamente o menu</li>
-      <li>QRCode.js para exibir o QR Code de acesso</li>
-      <li>Imagens otimizadas para melhor visualização</li>
-    </ul>
-    <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer" class="button-link">Abrir Cardápio Brito Espetinhos</a>
   </section>
 
   <section class="section">
@@ -117,6 +118,32 @@
   </footer>
 
   <script>
+    // Tooltip funcionalidade
+    const linkCardapio = document.getElementById('link-cardapio');
+    const tooltip = document.getElementById('tooltip-tech-cardapio');
+
+    linkCardapio.addEventListener('mouseenter', () => {
+      tooltip.style.display = 'block';
+    });
+
+    linkCardapio.addEventListener('mouseleave', () => {
+      // Pequeno delay para o caso do mouse ir para o tooltip
+      setTimeout(() => {
+        if (!tooltip.matches(':hover') && !linkCardapio.matches(':hover')) {
+          tooltip.style.display = 'none';
+        }
+      }, 150);
+    });
+
+    tooltip.addEventListener('mouseenter', () => {
+      tooltip.style.display = 'block';
+    });
+
+    tooltip.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+
+    // Resto do seu script do PDF
     window.onload = () => {
       const { jsPDF } = window.jspdf;
       const btn = document.getElementById('btnDownload');
