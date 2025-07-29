@@ -38,7 +38,8 @@ window.onload = () => {
     function addParagraph(text) {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
-      const lines = doc.splitTextToSize(text, maxWidth);
+      // Substitui quebras de linha \n por linhas separadas para o PDF
+      const lines = doc.splitTextToSize(text.replace(/\n/g, " "), maxWidth);
       lines.forEach(line => {
         if (y > pageHeight - 20) {
           doc.addPage();
@@ -48,6 +49,25 @@ window.onload = () => {
         y += 7;
       });
       y += 5;
+    }
+
+    function addParagraphWithLineBreaks(text) {
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      // Quebra o texto nas ocorrências de \n para manter as linhas no PDF
+      const paragraphs = text.split('\n');
+      paragraphs.forEach(paragraph => {
+        const lines = doc.splitTextToSize(paragraph, maxWidth);
+        lines.forEach(line => {
+          if (y > pageHeight - 20) {
+            doc.addPage();
+            y = 20;
+          }
+          doc.text(line, leftMargin, y);
+          y += 7;
+        });
+        y += 5; // espaço extra entre parágrafos
+      });
     }
 
     function addBulletList(items) {
@@ -91,9 +111,9 @@ window.onload = () => {
     addParagraph("Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)");
 
     addTitle("Experiência");
-    addParagraph("Assistente analista de sistemas - Arklok (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.");
+    // Aqui, use o addParagraphWithLineBreaks para aceitar possíveis \n
+    addParagraphWithLineBreaks("Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.");
 
     doc.save('curriculo.pdf');
   });
 };
-
