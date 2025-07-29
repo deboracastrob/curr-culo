@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formacaoTitle: "Formação",
         formacaoText: "Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)",
         experienciaTitle: "Experiência",
-        experienciaText: "Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa."
+        experienciaText: "Assistente analista de sistemas - Arklok (2022-2023):\nResponsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.",
+        cardapioEspetinhos: "Cardápio com QR Code"
       },
       en: {
         headerTitle: "Débora Brito",
@@ -66,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formacaoTitle: "Education",
         formacaoText: "Technologist in Systems Analysis and Development – Anhembi Morumbi (in progress)",
         experienciaTitle: "Experience",
-        experienciaText: "Assistant systems analyst - Arklok (2022-2023):\nResponsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance."
+        experienciaText: "Assistant systems analyst - Arklok (2022-2023):\nResponsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance.",
+        cardapioEspetinhos: "Menu with QR Code"
       }
     };
 
@@ -156,4 +158,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     doc.save(currentLang === 'pt' ? 'curriculo.pdf' : 'resume.pdf');
   });
-};
+});
