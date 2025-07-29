@@ -54,7 +54,7 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <a href="brito-espetinhos.html" target="_blank">Cardápio com QR Code</a>
+            <a href="brito-espetinhos.html" target="_blank" id="linkCardapio">Cardápio com QR Code</a>
             <span style="margin-left: 8px;">
               <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo" style="color: #2b7de9; text-decoration: underline;">
                 (clique aqui para ver as tecnologias usadas)
@@ -221,11 +221,13 @@
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
-      toggleLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        infoBox.classList.toggle('show');
-        toggleLink.setAttribute('aria-expanded', infoBox.classList.contains('show'));
-      });
+      if (toggleLink && infoBox) {
+        toggleLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          infoBox.classList.toggle('show');
+          toggleLink.setAttribute('aria-expanded', infoBox.classList.contains('show'));
+        });
+      }
     });
   </script>
 </body>
