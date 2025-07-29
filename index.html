@@ -6,66 +6,6 @@
   <title>Débora Brito | Desenvolvedora Front-End</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    /* Estilo simples para o submenu */
-    .submenu {
-      margin-left: 20px;
-      list-style-type: circle;
-      padding-left: 0;
-    }
-    .submenu li {
-      margin-bottom: 6px;
-      position: relative; /* necessário para posicionar o tooltip */
-    }
-    /* Para o texto HTML5 & CSS3 ficar com estilo de lista mas não link */
-    .no-link {
-      color: #000;
-      font-weight: bold;
-      cursor: default;
-      text-decoration: none;
-    }
-
-    /* Quadro das tecnologias, inicialmente escondido */
-    #cardapioInfo {
-      display: none;
-      position: absolute;
-      top: 120%;
-      left: 0;
-      width: 280px;
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: #333;
-      z-index: 9999;
-    }
-    #cardapioInfo strong {
-      color: #b22222;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-    }
-    #cardapioInfo ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-    #cardapioInfo ul li {
-      margin-bottom: 6px;
-    }
-
-    /* Cursor pointer para o link que ativa o quadro */
-    #toggleCardapioInfo {
-      cursor: pointer;
-      color: #2b7de9;
-      text-decoration: underline;
-    }
-    #toggleCardapioInfo:hover {
-      color: #1a5ec8;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -83,10 +23,11 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <!-- Link que ativa o quadro -->
-            <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo">
-              Cardápio Brito Espetinhos (QR Code)
-            </a>
+            <!-- Link do projeto + link para abrir tecnologias -->
+            <a href="brito-espetinhos.html" target="_blank">Cardápio Brito Espetinhos (QR Code)</a>
+            <span id="toggleCardapioInfo" role="button" aria-expanded="false" aria-controls="cardapioInfo" style="margin-left: 8px; color:#2b7de9; text-decoration:underline; cursor:pointer;">
+              (ver tecnologias usadas)
+            </span>
             <!-- Quadro com as tecnologias -->
             <div id="cardapioInfo" role="region" aria-live="polite">
               <strong>Tecnologias usadas:</strong>
@@ -134,19 +75,14 @@
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
-      toggleLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (infoBox.style.display === 'block') {
-          infoBox.style.display = 'none';
-          toggleLink.setAttribute('aria-expanded', 'false');
-        } else {
-          infoBox.style.display = 'block';
-          toggleLink.setAttribute('aria-expanded', 'true');
-        }
+      toggleLink.addEventListener('click', () => {
+        const isVisible = infoBox.style.display === 'block';
+        infoBox.style.display = isVisible ? 'none' : 'block';
+        toggleLink.setAttribute('aria-expanded', !isVisible);
       });
     });
 
-    // Seu código do jsPDF (mantido igual)
+    // Código para gerar o PDF
     window.onload = () => {
       const { jsPDF } = window.jspdf;
       const btn = document.getElementById('btnDownload');
