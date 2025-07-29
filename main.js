@@ -25,7 +25,20 @@
       experienciaTitle: "Experiência",
       experienciaDesc: "Assistente analista de sistemas - Arklok (2022-2023): Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software, além de auxiliar na manutenção da rede interna da empresa.",
       btnDownload: "Baixar currículo em PDF",
-      footerText: "Débora Brito © 2025"
+      footerText: "Débora Brito © 2025",
+      pdfTitle: "Currículo de Débora Brito",
+      pdfContent: [
+        "Débora Brito",
+        "Desenvolvedora Front-End em transição",
+        "",
+        "Formação:",
+        "Tecnólogo em Análise e Desenvolvimento de Sistemas – Anhembi Morumbi (em andamento)",
+        "",
+        "Experiência:",
+        "Assistente analista de sistemas - Arklok (2022-2023)",
+        "Responsável pelo atendimento e suporte a usuários, solução de problemas de hardware e software,",
+        "além de auxiliar na manutenção da rede interna da empresa."
+      ],
     },
     en: {
       headerTitle: "Débora Brito",
@@ -52,11 +65,28 @@
       experienciaTitle: "Experience",
       experienciaDesc: "Assistant systems analyst - Arklok (2022-2023): Responsible for user support, troubleshooting hardware and software issues, and assisting with internal network maintenance.",
       btnDownload: "Download resume as PDF",
-      footerText: "Débora Brito © 2025"
+      footerText: "Débora Brito © 2025",
+      pdfTitle: "Resume of Débora Brito",
+      pdfContent: [
+        "Débora Brito",
+        "Front-End Developer in transition",
+        "",
+        "Education:",
+        "Technologist in Systems Analysis and Development – Anhembi Morumbi (in progress)",
+        "",
+        "Experience:",
+        "Assistant systems analyst - Arklok (2022-2023)",
+        "Responsible for user support, troubleshooting hardware and software issues,",
+        "and assisting with internal network maintenance."
+      ],
     }
   };
 
+  let currentLang = 'pt';
+
   function translatePage(lang) {
+    currentLang = lang;
+
     document.querySelector('header h1').textContent = translations[lang].headerTitle;
     document.querySelector('header p').textContent = translations[lang].headerSubtitle;
 
@@ -124,6 +154,33 @@
         toggleLink.setAttribute('aria-expanded', infoBox.classList.contains('show'));
       });
     }
+
+    const btnDownload = document.getElementById('btnDownload');
+    if (btnDownload) {
+      btnDownload.addEventListener('click', () => {
+        generatePDF(currentLang);
+      });
+    }
+  }
+
+  function generatePDF(lang) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const title = translations[lang].pdfTitle;
+    const content = translations[lang].pdfContent;
+
+    doc.setFontSize(18);
+    doc.text(title, 10, 20);
+
+    doc.setFontSize(12);
+    let yPos = 30;
+    content.forEach(line => {
+      doc.text(line, 10, yPos);
+      yPos += 10;
+    });
+
+    doc.save(`${title.replace(/\s+/g, "_")}.pdf`);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
