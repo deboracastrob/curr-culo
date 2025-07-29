@@ -64,17 +64,36 @@ footer {
   }
 }
 
-/* Tooltip para tecnologias do Cardápio */
-.submenu li {
-  position: relative; /* necessário para posicionar tooltip */
-  margin-bottom: 6px;
+/* Estilo do submenu */
+.submenu {
+  margin-left: 20px;
+  list-style-type: circle;
+  padding-left: 0;
 }
 
-.tooltip-tech {
+.submenu li {
+  margin-bottom: 6px;
+  position: relative; /* para posicionar o quadro */
+}
+
+/* Link que abre o quadro */
+#toggleCardapioInfo {
+  cursor: pointer;
+  color: #2b7de9;
+  text-decoration: underline;
+  user-select: none;
+}
+
+#toggleCardapioInfo:hover {
+  color: #1a5ec8;
+}
+
+/* Quadro com as tecnologias - inicialmente escondido */
+#cardapioInfo {
   display: none;
   position: absolute;
-  top: 0;
-  left: 110%;
+  top: 120%;  /* fica abaixo do link */
+  left: 0;
   width: 280px;
   background: #f9f9f9;
   border: 1px solid #ccc;
@@ -87,23 +106,18 @@ footer {
   z-index: 9999;
 }
 
-.tooltip-tech strong {
+#cardapioInfo strong {
   color: #b22222;
   font-weight: bold;
   display: block;
   margin-bottom: 8px;
 }
 
-.tooltip-tech ul {
+#cardapioInfo ul {
   margin: 0;
   padding-left: 18px;
 }
 
-.tooltip-tech ul li {
+#cardapioInfo ul li {
   margin-bottom: 6px;
-}
-
-/* Mostrar tooltip quando o mouse estiver sobre o li que contém o link */
-.submenu li:hover > .tooltip-tech {
-  display: block;
 }
