@@ -24,12 +24,13 @@
       cursor: default;
       text-decoration: none;
     }
-    /* Tooltip que aparece ao passar o mouse */
-    .tooltip-tech {
+
+    /* Quadro das tecnologias, inicialmente escondido */
+    #cardapioInfo {
       display: none;
       position: absolute;
-      top: 0;
-      left: 110%;
+      top: 120%;
+      left: 0;
       width: 280px;
       background: #f9f9f9;
       border: 1px solid #ccc;
@@ -39,24 +40,30 @@
       font-family: Arial, sans-serif;
       font-size: 14px;
       color: #333;
-      z-index: 100;
+      z-index: 9999;
     }
-    .tooltip-tech strong {
+    #cardapioInfo strong {
       color: #b22222;
       font-weight: bold;
       display: block;
       margin-bottom: 8px;
     }
-    .tooltip-tech ul {
+    #cardapioInfo ul {
       margin: 0;
       padding-left: 18px;
     }
-    .tooltip-tech ul li {
+    #cardapioInfo ul li {
       margin-bottom: 6px;
     }
-    /* Mostrar tooltip quando o mouse estiver sobre o li que contém o link */
-    .submenu li:hover > .tooltip-tech {
-      display: block;
+
+    /* Cursor pointer para o link que ativa o quadro */
+    #toggleCardapioInfo {
+      cursor: pointer;
+      color: #2b7de9;
+      text-decoration: underline;
+    }
+    #toggleCardapioInfo:hover {
+      color: #1a5ec8;
     }
   </style>
 </head>
@@ -76,10 +83,12 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <a href="brito-espetinhos.html" target="_blank" rel="noopener noreferrer">
+            <!-- Link que ativa o quadro -->
+            <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo">
               Cardápio Brito Espetinhos (QR Code)
             </a>
-            <div class="tooltip-tech">
+            <!-- Quadro com as tecnologias -->
+            <div id="cardapioInfo" role="region" aria-live="polite">
               <strong>Tecnologias usadas:</strong>
               <ul>
                 <li>HTML5 e CSS3 para estrutura e estilo responsivo</li>
@@ -120,6 +129,24 @@
   </footer>
 
   <script>
+    // Controle para abrir/fechar o quadro de tecnologias ao clicar no link
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleLink = document.getElementById('toggleCardapioInfo');
+      const infoBox = document.getElementById('cardapioInfo');
+
+      toggleLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (infoBox.style.display === 'block') {
+          infoBox.style.display = 'none';
+          toggleLink.setAttribute('aria-expanded', 'false');
+        } else {
+          infoBox.style.display = 'block';
+          toggleLink.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Seu código do jsPDF (mantido igual)
     window.onload = () => {
       const { jsPDF } = window.jspdf;
       const btn = document.getElementById('btnDownload');
