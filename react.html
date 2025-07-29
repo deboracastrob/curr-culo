@@ -77,7 +77,7 @@
       flex-wrap: wrap;
     }
 
-    #weatherForm input[type="text"] {
+    input[type="text"] {
       flex-grow: 1;
       padding: 10px 12px;
       font-size: 1rem;
@@ -87,12 +87,12 @@
       min-width: 180px;
     }
 
-    #weatherForm input[type="text"]:focus {
+    input[type="text"]:focus {
       border-color: #155abf;
       outline: none;
     }
 
-    #weatherForm button {
+    button {
       padding: 10px 18px;
       font-size: 1rem;
       background-color: #2b7de9;
@@ -105,7 +105,7 @@
       min-width: 120px;
     }
 
-    #weatherForm button:hover {
+    button:hover {
       background-color: #155abf;
     }
 
@@ -173,7 +173,7 @@
       form {
         flex-direction: column;
       }
-      #weatherForm button {
+      button {
         width: 100%;
       }
       #weatherResult {
@@ -209,13 +209,14 @@ function Saudacao(props) {
 import React, { useState } from 'react';
 
 function Contador() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = React.useState(0);
   return (
     &lt;button onClick={() => setCount(count + 1)}&gt;Cliquei {count} vezes&lt;/button&gt;
   );
 }
     </code></pre>
-    <p>(Esse exemplo precisa de um ambiente React para funcionar.)</p>
+    <p>(Veja a versão funcional abaixo, rodando com React real!)</p>
+    <div id="contadorReact"></div>
   </section>
 
   <section class="section">
@@ -239,13 +240,23 @@ function Contador() {
 
   <!-- Script React com Babel para JSX -->
   <script type="text/babel">
-    const { useState } = React;
+    // Componente funcional contador real
+    function Contador() {
+      const [count, setCount] = React.useState(0);
+      return (
+        <button onClick={() => setCount(count + 1)}>
+          Cliquei {count} vezes
+        </button>
+      );
+    }
+    ReactDOM.render(<Contador />, document.getElementById('contadorReact'));
 
+    // Componente do App de clima com React real
     function WeatherApp() {
-      const [city, setCity] = useState('');
-      const [weather, setWeather] = useState(null);
-      const [loading, setLoading] = useState(false);
-      const [error, setError] = useState(null);
+      const [city, setCity] = React.useState('');
+      const [weather, setWeather] = React.useState(null);
+      const [loading, setLoading] = React.useState(false);
+      const [error, setError] = React.useState(null);
 
       const apiKey = '9bf26c14528e5cad9e77583ee3253c37';
 
@@ -279,7 +290,7 @@ function Contador() {
 
       return (
         <div>
-          <form id="weatherForm" onSubmit={fetchWeather}>
+          <form onSubmit={fetchWeather}>
             <input
               type="text"
               placeholder="Digite o nome da cidade"
@@ -309,7 +320,6 @@ function Contador() {
         </div>
       );
     }
-
     ReactDOM.render(<WeatherApp />, document.getElementById('reactWeatherApp'));
   </script>
 </body>
