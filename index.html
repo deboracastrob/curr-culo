@@ -23,19 +23,20 @@
         <ul class="submenu">
           <li><a href="html-css.html">Projeto geral de HTML5 &amp; CSS3</a></li>
           <li style="position: relative;">
-            <!-- Link do projeto + link para abrir tecnologias -->
-            <a href="brito-espetinhos.html" target="_blank">Cardápio Brito Espetinhos (QR Code)</a>
-            <span id="toggleCardapioInfo" role="button" aria-expanded="false" aria-controls="cardapioInfo" style="margin-left: 8px; color:#2b7de9; text-decoration:underline; cursor:pointer;">
-              (ver tecnologias usadas)
-            </span>
+            <!-- Link que ativa o quadro -->
+            <a id="toggleCardapioInfo" href="javascript:void(0)" aria-expanded="false" aria-controls="cardapioInfo">
+              Cardápio Brito Espetinhos (QR Code)
+            </a>
             <!-- Quadro com as tecnologias -->
             <div id="cardapioInfo" role="region" aria-live="polite">
               <strong>Tecnologias usadas:</strong>
               <ul>
-                <li>HTML5 e CSS3 para estrutura e estilo responsivo</li>
-                <li>JavaScript para gerar dinamicamente o menu</li>
-                <li>QRCode.js para exibir o QR Code de acesso</li>
-                <li>Imagens otimizadas para melhor visualização</li>
+                <li><strong>HTML5</strong> – Estrutura da página</li>
+                <li><strong>CSS3</strong> – Estilização visual e responsividade</li>
+                <li><strong>JavaScript</strong> – Manipulação dinâmica do conteúdo e interação</li>
+                <li><strong>JSON</strong> – Dados do cardápio carregados dinamicamente</li>
+                <li><strong>QRCode.js</strong> – Geração do QR Code</li>
+                <li><strong>GitHub Pages</strong> – Hospedagem gratuita do projeto</li>
               </ul>
             </div>
           </li>
@@ -70,19 +71,20 @@
   </footer>
 
   <script>
-    // Controle para abrir/fechar o quadro de tecnologias ao clicar no link
+    // Mostrar/esconder o quadro de tecnologias do cardápio
     document.addEventListener('DOMContentLoaded', () => {
       const toggleLink = document.getElementById('toggleCardapioInfo');
       const infoBox = document.getElementById('cardapioInfo');
 
-      toggleLink.addEventListener('click', () => {
-        const isVisible = infoBox.style.display === 'block';
-        infoBox.style.display = isVisible ? 'none' : 'block';
-        toggleLink.setAttribute('aria-expanded', !isVisible);
+      toggleLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = infoBox.style.display === 'block';
+        infoBox.style.display = isOpen ? 'none' : 'block';
+        toggleLink.setAttribute('aria-expanded', !isOpen);
       });
     });
 
-    // Código para gerar o PDF
+    // Geração de PDF com jsPDF
     window.onload = () => {
       const { jsPDF } = window.jspdf;
       const btn = document.getElementById('btnDownload');
